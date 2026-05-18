@@ -1,0 +1,36 @@
+# Pipeline ETL: ingesta y transformacion
+pandas==2.2.2           # Manipulacion de DataFrames
+pyreadstat==1.2.7       # Lectura de archivos Stata .dta con etiquetas
+pyarrow==16.0.0         # Motor Parquet (lectura/escritura)
+openpyxl==3.1.2         # Lectura/escritura de archivos Excel
+
+# Almacenamiento y consultas 
+duckdb==0.10.3          # Consultas SQL analiticas sobre Parquet
+pyyaml==6.0.1           # Lectura de archivos de configuración YAML
+
+# Motor de cálculo 
+numpy==1.26.4           # Operaciones numéricas
+
+# Plataforma web
+streamlit==1.35.0       # Framework de la aplicación web
+plotly==5.22.0          # Gráficos interactivos (barras, líneas, mapas)
+altair==5.3.0           # Gráficos declarativos (alternativa a Plotly)
+
+# Mapas geográficos
+geopandas==0.14.4       # Manejo de datos geoespaciales
+folium==0.16.0          # Mapas interactivos (Leaflet.js)
+streamlit-folium==0.20.0 # Integración Folium con Streamlit
+
+# Exploración y notebooks
+jupyter==1.0.0          # JupyterLab + notebooks
+ipykernel==6.29.4       # Kernel Python para notebooks en VS Code
+matplotlib==3.9.0       # Gráficos estáticos para notebooks
+seaborn==0.13.2         # Visualización estadística en notebooks
+
+# Tests
+pytest==8.2.1           # Framework de tests
+pytest-cov==5.0.0       # Cobertura de tests
+
+# Calidad de código
+black==24.4.2           # Formateador de código
+flake8==7.0.0           # Linter
