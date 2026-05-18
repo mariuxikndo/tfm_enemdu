@@ -1,0 +1,49 @@
+# Entorno virtual
+.venv/
+env/
+venv/
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.Python
+*.egg-info/
+dist/
+build/
+
+# Tests y cobertura
+.pytest_cache/
+.coverage
+htmlcov/
+.mypy_cache/
+
+# Datos sensibles (microdatos INEC sin procesar)
+# Los microdatos raw NO se versionan por tamaño y licencia
+data/raw/
+# Los datos procesados tampoco (pueden regenerarse con el pipeline)
+data/processed/
+data/outputs/
+
+# Jupyter
+.ipynb_checkpoints/
+*.ipynb_checkpoints
+
+# VS Code (el .vscode/ SÍ se versiona para compartir config)
+# Solo se excluye el histórico local
+.vscode/launch.json
+
+# Sistema operativo
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Variables de entorno
+.env
+.env.local
+*.env
+
+# Logs
+*.log
+logs/
