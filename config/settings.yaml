@@ -1,0 +1,107 @@
+# ══════════════════════════════════════════════════════════════════
+#  config/settings.yaml — Configuración global del proyecto
+#  Plataforma web indicadores ambientales MIAH-ENEMDU 2025
+# ══════════════════════════════════════════════════════════════════
+
+proyecto:
+  nombre: "Plataforma MIAH-ENEMDU"
+  descripcion: "Análisis y visualización de indicadores ambientales de hogares"
+  autor: "Mariuxi Cando Ortega"
+  anio_datos: 2025
+
+# ── Rutas de datos ─────────────────────────────────────────────────
+rutas:
+  raw: "data/raw/"
+  processed: "data/processed/"
+  outputs: "data/outputs/"
+  db: "data/outputs/indicators.db"
+
+# ── Archivos fuente ODS del INEC ──────────────────────────────────
+# Coloca los archivos .ods en data/raw/ con exactamente estos nombres
+archivos:
+  ambiental_ago:
+    nombre: "enemdu_ambiental_2025_08.ods"
+    periodo: "2025-08"
+    mes: "Agosto 2025"
+    hoja: 0 # índice de la hoja de datos (0 = primera)
+    tipo: "ambiental"
+
+  ambiental_oct:
+    nombre: "enemdu_ambiental_2025_10.ods"
+    periodo: "2025-10"
+    mes: "Octubre 2025"
+    hoja: 0
+    tipo: "ambiental"
+
+  persona_ago:
+    nombre: "enemdu_personas_2025_08.ods"
+    periodo: "2025-08"
+    mes: "Agosto 2025"
+    hoja: 0
+    tipo: "persona"
+
+# ── Variables geográficas ─────────────────────────────────────────
+# Nombre estandarizado que usará el pipeline después de la transformación
+geo:
+  area: "area" # 1=Urbano, 2=Rural
+  provincia: "prov" # código numérico de provincia
+  canton: "cant"
+  ciudad: "ciudad"
+
+  # En persona_2025_08 la variable provincia se llama prov_dirad
+  # El transformer la renombra a "prov" para estandarizar
+  alias_provincia:
+    persona_ago: "prov_dirad"
+
+# ── Identificadores de hogar ──────────────────────────────────────
+# Presentes en ambiental_oct y persona_ago; NO en ambiental_ago
+identificadores:
+  vivienda: "vivienda"
+  hogar: "hogar"
+  conglomerado: "conglomerado" # solo en ambiental_oct
+  panelm: "panelm" # solo en ambiental_oct
+
+# ── Factor de expansión muestral ─────────────────────────────────
+# Presente en los 3 archivos con el mismo nombre
+expansion:
+  variable: "fexp"
+  descripcion: "Factor de expansión — representa el número de hogares/personas en la población"
+
+# ── Etiquetas para área ───────────────────────────────────────────
+etiquetas_area:
+  1: "Urbano"
+  2: "Rural"
+
+# ── Provincias del Ecuador (códigos INEC) ─────────────────────────
+etiquetas_provincia:
+  1: "Azuay"
+  2: "Bolívar"
+  3: "Cañar"
+  4: "Carchi"
+  5: "Cotopaxi"
+  6: "Chimborazo"
+  7: "El Oro"
+  8: "Esmeraldas"
+  9: "Guayas"
+  10: "Imbabura"
+  11: "Loja"
+  12: "Los Ríos"
+  13: "Manabí"
+  14: "Morona Santiago"
+  15: "Napo"
+  16: "Pastaza"
+  17: "Pichincha"
+  18: "Tungurahua"
+  19: "Zamora Chinchipe"
+  20: "Galápagos"
+  21: "Sucumbíos"
+  22: "Orellana"
+  23: "Santo Domingo"
+  24: "Santa Elena"
+  90: "Zonas No Delimitadas"
+
+# ── Configuración de logging ──────────────────────────────────────
+logging:
+  nivel: "INFO"
+  formato: "%(asctime)s [%(levelname)s] %(name)s — %(message)s"
+  archivo: "data/outputs/pipeline.log"

@@ -1,0 +1,101 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        // 1. Ejecutar el pipeline ETL completo
+        {
+            "label": "▶ Ejecutar pipeline ETL",
+            "type": "shell",
+            "command": "python pipeline/orchestrator.py",
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "group": "build",
+            "presentation": {
+                "reveal": "always",
+                "panel": "dedicated",
+                "clear": true
+            },
+            "problemMatcher": "$python"
+        },
+        // 2. Lanzar la webapp Streamlit
+        {
+            "label": "🌐 Lanzar webapp Streamlit",
+            "type": "shell",
+            "command": "streamlit run webapp/app.py --server.port 8501",
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "group": "none",
+            "isBackground": true,
+            "presentation": {
+                "reveal": "always",
+                "panel": "dedicated",
+                "clear": true
+            },
+            "problemMatcher": []
+        },
+        // 3. Ejecutar tests con pytest
+        {
+            "label": "🧪 Ejecutar tests (pytest)",
+            "type": "shell",
+            "command": "pytest tests/ -v --tb=short",
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "group": "test",
+            "presentation": {
+                "reveal": "always",
+                "panel": "dedicated",
+                "clear": true
+            },
+            "problemMatcher": []
+        },
+        // 4. Calcular indicadores
+        {
+            "label": "📊 Calcular indicadores",
+            "type": "shell",
+            "command": "python -c \"from calculator.engine import run_all; run_all()\"",
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "group": "none",
+            "presentation": {
+                "reveal": "always",
+                "panel": "dedicated",
+                "clear": true
+            },
+            "problemMatcher": "$python"
+        },
+        // 5. Instalar dependencias
+        {
+            "label": "📦 Instalar dependencias",
+            "type": "shell",
+            "command": "pip install -r requirements.txt",
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "group": "none",
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared",
+                "clear": false
+            },
+            "problemMatcher": []
+        },
+        // 6. Limpiar caché Python
+        {
+            "label": "🧹 Limpiar caché (__pycache__)",
+            "type": "shell",
+            "command": "find . -type d -name __pycache__ -not -path './.venv/*' -exec rm -rf {} + 2>/dev/null; echo 'Caché limpiado'",
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "group": "none",
+            "presentation": {
+                "reveal": "silent",
+                "panel": "shared"
+            },
+            "problemMatcher": []
+        }
+    ]
+}

@@ -1,0 +1,85 @@
+{
+    // Intérprete Python
+    // Apunta al entorno virtual creado dentro del proyecto.
+    // Ajusta la ruta según tu sistema operativo:
+    //   Windows : "${workspaceFolder}\\.venv\\Scripts\\python.exe"
+    //   macOS/Linux : "${workspaceFolder}/.venv/bin/python"
+    "python.defaultInterpreterPath": "${workspaceFolder}/.venv/bin/python",
+    // Linting y formato
+    "python.linting.enabled": true,
+    "python.linting.pylintEnabled": false,
+    "python.linting.flake8Enabled": true,
+    "python.linting.flake8Args": [
+        "--max-line-length=100",
+        "--exclude=.venv,data,docs,notebooks"
+    ],
+    "python.formatting.provider": "black",
+    "python.formatting.blackArgs": [
+        "--line-length",
+        "100"
+    ],
+    "editor.formatOnSave": true,
+    "editor.rulers": [
+        100
+    ],
+    // Imports automáticos (Pylance)
+    "python.analysis.autoImportCompletions": true,
+    "python.analysis.typeCheckingMode": "basic",
+    // Le indica a Pylance dónde están los módulos del proyecto
+    // para que reconozca: from pipeline.ingester import ... sin errores
+    "python.analysis.extraPaths": [
+        "${workspaceFolder}"
+    ],
+    // Tests con pytest
+    "python.testing.pytestEnabled": true,
+    "python.testing.pytestArgs": [
+        "tests/"
+    ],
+    "python.testing.unittestEnabled": false,
+    "python.testing.autoTestDiscoverOnSaveEnabled": true,
+    // Notebooks Jupyter
+    "jupyter.notebookFileRoot": "${workspaceFolder}/notebooks",
+    "jupyter.askForKernelRestart": false,
+    // Editor general
+    "editor.tabSize": 4,
+    "editor.insertSpaces": true,
+    "editor.detectIndentation": false,
+    "editor.wordWrap": "off",
+    "editor.minimap.enabled": false,
+    "editor.bracketPairColorization.enabled": true,
+    "editor.suggestSelection": "first",
+    // Archivos a excluir del explorador
+    "files.exclude": {
+        "**/__pycache__": true,
+        "**/*.pyc": true,
+        "**/.pytest_cache": true,
+        "**/.mypy_cache": true,
+        "**/.venv": true,
+        "**/node_modules": true,
+        "**/.DS_Store": true
+    },
+    // Asociación de tipos de archivo
+    "files.associations": {
+        "*.yaml": "yaml",
+        "*.yml": "yaml",
+        "Makefile": "makefile",
+        "*.env": "dotenv"
+    },
+    // YAML (extensión redhat)
+    "yaml.format.enable": true,
+    "yaml.validate": true,
+    // Terminal integrado
+    "terminal.integrated.cwd": "${workspaceFolder}",
+    // Activa automáticamente el entorno virtual al abrir el terminal
+    "python.terminal.activateEnvironment": true,
+    // Git
+    "git.autofetch": true,
+    "git.confirmSync": false,
+    // Streamlit: tarea de ejecución rápida
+    // Se complementa con tasks.json (ver ese archivo)
+    "files.watcherExclude": {
+        "**/.venv/**": true,
+        "**/data/raw/**": true,
+        "**/data/processed/**": true
+    }
+}

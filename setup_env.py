@@ -15,7 +15,7 @@ import subprocess
 from pathlib import Path
 
 
-# ── Colores para la terminal ───────────────────────────────────────────────
+# Colores para la terminal
 OK   = "\033[92m✓\033[0m"
 ERR  = "\033[91m✗\033[0m"
 WARN = "\033[93m⚠\033[0m"

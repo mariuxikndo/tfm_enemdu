@@ -1,5 +1,6 @@
 # Pipeline ETL: ingesta y transformacion
 pandas==2.2.2           # Manipulacion de DataFrames
+odfpy==1.4.1            # Lectura de archivos ODS del INEC
 pyreadstat==1.2.7       # Lectura de archivos Stata .dta con etiquetas
 pyarrow==16.0.0         # Motor Parquet (lectura/escritura)
 openpyxl==3.1.2         # Lectura/escritura de archivos Excel

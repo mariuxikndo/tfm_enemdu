@@ -1,0 +1,29 @@
+{
+    // VS Code mostrará una notificación al abrir el proyecto
+    // ofreciendo instalar todas estas extensiones automáticamente.
+    "recommendations": [
+        // Python
+        "ms-python.python", // Soporte Python principal
+        "ms-python.pylance", // Autocompletado e inferencia de tipos
+        "ms-python.black-formatter", // Formato automático con Black
+        "ms-python.flake8", // Linting
+        // Notebooks
+        "ms-toolsai.jupyter", // Jupyter Notebooks dentro de VS Code
+        "ms-toolsai.jupyter-keymap", // Atajos de teclado estilo Jupyter
+        // Datos
+        "randomfractalsinc.parquet-visualizer", // Previsualizar archivos .parquet
+        "qwtel.sqlite-viewer", // Explorar indicators.db
+        // YAML y configuración
+        "redhat.vscode-yaml", // Validación y autocompletado YAML
+        "ms-vscode.makefile-tools", // Soporte para Makefile
+        // Git y control de versiones
+        "eamodio.gitlens", // Historial Git por línea
+        "mhutchie.git-graph", // Visualización del árbol de commits
+        // Productividad
+        "njpwerner.autodocstring", // Generación automática de docstrings
+        "christian-kohler.path-intellisense", // Autocompletado de rutas de archivo
+        "usernamehw.errorlens", // Errores y warnings inline en el código
+        "streetsidesoftware.code-spell-checker", // Corrector ortográfico en comentarios
+        "streetsidesoftware.code-spell-checker-spanish" // Diccionario español
+    ]
+}
