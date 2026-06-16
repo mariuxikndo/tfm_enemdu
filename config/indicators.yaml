@@ -1,0 +1,472 @@
+# ══════════════════════════════════════════════════════════════════
+#  config/indicators.yaml — Catálogo de indicadores ambientales
+#  Plataforma MIAH-ENEMDU 2025 · Alineado con MDEA (ONU/CEPAL, 2013)
+#
+#  Estructura de cada indicador:
+#    id           : código único del indicador
+#    nombre       : etiqueta corta para la interfaz
+#    descripcion  : descripción completa para fichas técnicas
+#    dimension    : agua | residuos | energia | movilidad | conciencia
+#    archivo      : ambiental_ago | ambiental_oct | persona_ago
+#    tipo         : proporcion | media | indice
+#    variable     : variable(s) del Parquet que intervienen
+#    valor_pos    : valor(es) que representan la práctica positiva
+#    excluir_vals : valores que excluyen el registro del denominador
+#    unidad       : unidad de medida del resultado
+#    formula      : descripción de la fórmula en texto
+#    desagregable : [area, prov] — dimensiones de desagregación disponibles
+#    ods          : Objetivo de Desarrollo Sostenible relacionado
+# ══════════════════════════════════════════════════════════════════
+
+dimensiones:
+  agua:       "Prácticas de uso del agua"
+  residuos:   "Gestión y clasificación de residuos"
+  energia:    "Eficiencia energética"
+  movilidad:  "Movilidad y transporte"
+  conciencia: "Conciencia y responsabilidad ambiental"
+
+indicadores:
+
+  # ── DIMENSIÓN: AGUA ──────────────────────────────────────────────
+  # Formulario OCT-2025, Sección 6, Pregunta 5
+  # Escala: 1=Sí, 2=No, 3=No aplica
+
+  - id: IND_AGUA_01
+    nombre: "Hogares que reusan el agua"
+    descripcion: "Porcentaje de hogares que habitualmente reusan el agua para regar, fregar o tirar al baño"
+    dimension: agua
+    archivo: ambiental_oct
+    tipo: proporcion
+    variable: s101p61
+    valor_pos: [1]
+    excluir_vals: [3]
+    unidad: "%"
+    formula: "sum(fexp donde s101p61=1) / sum(fexp donde s101p61 en [1,2]) × 100"
+    desagregable: [area, prov]
+    ods: "ODS 6 — Agua limpia y saneamiento"
+
+  - id: IND_AGUA_02
+    nombre: "Uso de balde en lugar de manguera"
+    descripcion: "Porcentaje de hogares que habitualmente usan balde en lugar de manguera para lavar vehículo, regar plantas, etc."
+    dimension: agua
+    archivo: ambiental_oct
+    tipo: proporcion
+    variable: s101p62
+    valor_pos: [1]
+    excluir_vals: [3]
+    unidad: "%"
+    formula: "sum(fexp donde s101p62=1) / sum(fexp donde s101p62 en [1,2]) × 100"
+    desagregable: [area, prov]
+    ods: "ODS 6 — Agua limpia y saneamiento"
+
+  - id: IND_AGUA_03
+    nombre: "Cierre de llaves al jabonarse"
+    descripcion: "Porcentaje de hogares que habitualmente cierran las llaves al jabonarse los platos, bañarse o cepillarse los dientes"
+    dimension: agua
+    archivo: ambiental_oct
+    tipo: proporcion
+    variable: s101p63
+    valor_pos: [1]
+    excluir_vals: [3]
+    unidad: "%"
+    formula: "sum(fexp donde s101p63=1) / sum(fexp donde s101p63 en [1,2]) × 100"
+    desagregable: [area, prov]
+    ods: "ODS 6 — Agua limpia y saneamiento"
+
+  - id: IND_AGUA_04
+    nombre: "Ducha en menos de 10 minutos"
+    descripcion: "Porcentaje de hogares cuyos miembros habitualmente se duchan en menos de 10 minutos"
+    dimension: agua
+    archivo: ambiental_oct
+    tipo: proporcion
+    variable: s101p64
+    valor_pos: [1]
+    excluir_vals: [3]
+    unidad: "%"
+    formula: "sum(fexp donde s101p64=1) / sum(fexp donde s101p64 en [1,2]) × 100"
+    desagregable: [area, prov]
+    ods: "ODS 6 — Agua limpia y saneamiento"
+
+  - id: IND_AGUA_05
+    nombre: "Revisión regular de tuberías"
+    descripcion: "Porcentaje de hogares que revisan regularmente las tuberías para detectar fugas"
+    dimension: agua
+    archivo: ambiental_oct
+    tipo: proporcion
+    variable: s101p65
+    valor_pos: [1]
+    excluir_vals: [3]
+    unidad: "%"
+    formula: "sum(fexp donde s101p65=1) / sum(fexp donde s101p65 en [1,2]) × 100"
+    desagregable: [area, prov]
+    ods: "ODS 6 — Agua limpia y saneamiento"
+
+  - id: IND_AGUA_06
+    nombre: "Economizadores de chorro"
+    descripcion: "Porcentaje de hogares que disponen de economizadores de chorro (reductores de flujo)"
+    dimension: agua
+    archivo: ambiental_oct
+    tipo: proporcion
+    variable: s101p66
+    valor_pos: [1]
+    excluir_vals: [3]
+    unidad: "%"
+    formula: "sum(fexp donde s101p66=1) / sum(fexp donde s101p66 en [1,2]) × 100"
+    desagregable: [area, prov]
+    ods: "ODS 6 — Agua limpia y saneamiento"
+
+  - id: IND_AGUA_07
+    nombre: "Inodoro de doble descarga"
+    descripcion: "Porcentaje de hogares que disponen de inodoro de doble descarga"
+    dimension: agua
+    archivo: ambiental_oct
+    tipo: proporcion
+    variable: s101p67
+    valor_pos: [1]
+    excluir_vals: [3]
+    unidad: "%"
+    formula: "sum(fexp donde s101p67=1) / sum(fexp donde s101p67 en [1,2]) × 100"
+    desagregable: [area, prov]
+    ods: "ODS 6 — Agua limpia y saneamiento"
+
+  - id: IND_AGUA_08
+    nombre: "Índice de prácticas de ahorro de agua"
+    descripcion: "Índice que mide la adopción de prácticas sostenibles de uso del agua. Suma de 8 prácticas positivas ponderadas (0=ninguna, 8=todas)"
+    dimension: agua
+    archivo: ambiental_oct
+    tipo: indice
+    variable: idx_agua
+    valor_pos: null
+    excluir_vals: []
+    unidad: "puntos (0–8)"
+    formula: "media ponderada(idx_agua) con fexp"
+    desagregable: [area, prov]
+    ods: "ODS 6 — Agua limpia y saneamiento"
+
+  # ── DIMENSIÓN: RESIDUOS ───────────────────────────────────────────
+  # Formulario OCT-2025, Sección 6, Preguntas 1–4
+  # Clasificación: 1=Sí, 2=No
+
+  - id: IND_RES_01
+    nombre: "Clasificación de residuos orgánicos"
+    descripcion: "Porcentaje de hogares que durante los últimos 12 meses clasificaron residuos orgánicos"
+    dimension: residuos
+    archivo: ambiental_oct
+    tipo: proporcion
+    variable: s101p11
+    valor_pos: [1]
+    excluir_vals: []
+    unidad: "%"
+    formula: "sum(fexp donde s101p11=1) / sum(fexp donde s101p11 en [1,2]) × 100"
+    desagregable: [area, prov]
+    ods: "ODS 12 — Producción y consumo responsables"
+
+  - id: IND_RES_02
+    nombre: "Clasificación de papel y cartón"
+    descripcion: "Porcentaje de hogares que clasificaron papel o cartón durante los últimos 12 meses"
+    dimension: residuos
+    archivo: ambiental_oct
+    tipo: proporcion
+    variable: s101p12a
+    valor_pos: [1]
+    excluir_vals: []
+    unidad: "%"
+    formula: "sum(fexp donde s101p12a=1) / sum(fexp donde s101p12a en [1,2]) × 100"
+    desagregable: [area, prov]
+    ods: "ODS 12 — Producción y consumo responsables"
+
+  - id: IND_RES_03
+    nombre: "Clasificación de plástico"
+    descripcion: "Porcentaje de hogares que clasificaron plástico durante los últimos 12 meses"
+    dimension: residuos
+    archivo: ambiental_oct
+    tipo: proporcion
+    variable: s101p12b
+    valor_pos: [1]
+    excluir_vals: []
+    unidad: "%"
+    formula: "sum(fexp donde s101p12b=1) / sum(fexp donde s101p12b en [1,2]) × 100"
+    desagregable: [area, prov]
+    ods: "ODS 12 — Producción y consumo responsables"
+
+  - id: IND_RES_04
+    nombre: "Clasificación de vidrio"
+    descripcion: "Porcentaje de hogares que clasificaron vidrio durante los últimos 12 meses"
+    dimension: residuos
+    archivo: ambiental_oct
+    tipo: proporcion
+    variable: s101p12c
+    valor_pos: [1]
+    excluir_vals: []
+    unidad: "%"
+    formula: "sum(fexp donde s101p12c=1) / sum(fexp donde s101p12c en [1,2]) × 100"
+    desagregable: [area, prov]
+    ods: "ODS 12 — Producción y consumo responsables"
+
+  - id: IND_RES_05
+    nombre: "Clasificación de al menos un residuo inorgánico"
+    descripcion: "Porcentaje de hogares que clasificaron al menos uno de los cinco tipos de residuos inorgánicos (papel, plástico, vidrio, metal o tetrapak)"
+    dimension: residuos
+    archivo: ambiental_oct
+    tipo: proporcion
+    variable: clasifica_inorganico
+    valor_pos: [1]
+    excluir_vals: []
+    unidad: "%"
+    formula: "sum(fexp donde clasifica_inorganico=1) / sum(fexp donde clasifica_inorganico en [0,1]) × 100"
+    desagregable: [area, prov]
+    ods: "ODS 12 — Producción y consumo responsables"
+
+  - id: IND_RES_06
+    nombre: "Disposición adecuada de residuos orgánicos"
+    descripcion: "Porcentaje de hogares que eliminaron residuos orgánicos mediante centro de acopio, venta/regalo, o compostaje (métodos adecuados)"
+    dimension: residuos
+    archivo: ambiental_oct
+    tipo: proporcion
+    variable: s101p2a
+    valor_pos: [1, 2, 5]
+    excluir_vals: [7]
+    unidad: "%"
+    formula: "sum(fexp donde s101p2a en [1,2,5]) / sum(fexp donde s101p2a en [1,2,3,4,5,6]) × 100"
+    desagregable: [area, prov]
+    ods: "ODS 12 — Producción y consumo responsables"
+
+  # ── DIMENSIÓN: ENERGÍA ────────────────────────────────────────────
+  # Formulario AGO-2025, Sección 7
+  # Escala: 1=Sí, 2=No, 3=No aplica
+  # NOTA: s101p73 (alimentos calientes) es INVERSO — positivo=No
+
+  - id: IND_ENE_01
+    nombre: "Desconexión de aparatos eléctricos"
+    descripcion: "Porcentaje de hogares que habitualmente desconectan los aparatos electrónicos y electrodomésticos cuando no los usan"
+    dimension: energia
+    archivo: ambiental_ago
+    tipo: proporcion
+    variable: s101p71
+    valor_pos: [1]
+    excluir_vals: [3]
+    unidad: "%"
+    formula: "sum(fexp donde s101p71=1) / sum(fexp donde s101p71 en [1,2]) × 100"
+    desagregable: [area, prov]
+    ods: "ODS 7 — Energía asequible y no contaminante"
+
+  - id: IND_ENE_02
+    nombre: "Apagan focos al salir"
+    descripcion: "Porcentaje de hogares que habitualmente apagan los focos al salir de una habitación"
+    dimension: energia
+    archivo: ambiental_ago
+    tipo: proporcion
+    variable: s101p72
+    valor_pos: [1]
+    excluir_vals: [3]
+    unidad: "%"
+    formula: "sum(fexp donde s101p72=1) / sum(fexp donde s101p72 en [1,2]) × 100"
+    desagregable: [area, prov]
+    ods: "ODS 7 — Energía asequible y no contaminante"
+
+  - id: IND_ENE_03
+    nombre: "No introducen alimentos calientes en refrigerador"
+    descripcion: "Porcentaje de hogares que NO introducen alimentos calientes en el refrigerador (buena práctica energética)"
+    dimension: energia
+    archivo: ambiental_ago
+    tipo: proporcion
+    variable: s101p73
+    valor_pos: [2]
+    excluir_vals: [3]
+    unidad: "%"
+    formula: "sum(fexp donde s101p73=2) / sum(fexp donde s101p73 en [1,2]) × 100"
+    desagregable: [area, prov]
+    ods: "ODS 7 — Energía asequible y no contaminante"
+    nota: "Variable inversa: el valor positivo es 2=No (NO introducir alimentos calientes es la buena práctica)"
+
+  - id: IND_ENE_04
+    nombre: "Planchan ropa en una sola sesión"
+    descripcion: "Porcentaje de hogares que habitualmente planchan la mayor cantidad de ropa posible en una sola vez para ahorrar energía"
+    dimension: energia
+    archivo: ambiental_ago
+    tipo: proporcion
+    variable: s101p74
+    valor_pos: [1]
+    excluir_vals: [3]
+    unidad: "%"
+    formula: "sum(fexp donde s101p74=1) / sum(fexp donde s101p74 en [1,2]) × 100"
+    desagregable: [area, prov]
+    ods: "ODS 7 — Energía asequible y no contaminante"
+
+  - id: IND_ENE_05
+    nombre: "Aprovechamiento de luz solar"
+    descripcion: "Porcentaje de hogares que abren cortinas y persianas para aprovechar la luz solar en lugar de usar luz artificial"
+    dimension: energia
+    archivo: ambiental_ago
+    tipo: proporcion
+    variable: s101p75
+    valor_pos: [1]
+    excluir_vals: [3]
+    unidad: "%"
+    formula: "sum(fexp donde s101p75=1) / sum(fexp donde s101p75 en [1,2]) × 100"
+    desagregable: [area, prov]
+    ods: "ODS 7 — Energía asequible y no contaminante"
+
+  - id: IND_ENE_06
+    nombre: "Electrodomésticos ahorradores de energía"
+    descripcion: "Porcentaje de hogares que disponen de aparatos electrodomésticos ahorradores de energía (refrigerador, lavadora, secadora)"
+    dimension: energia
+    archivo: ambiental_ago
+    tipo: proporcion
+    variable: s101p76
+    valor_pos: [1]
+    excluir_vals: [3]
+    unidad: "%"
+    formula: "sum(fexp donde s101p76=1) / sum(fexp donde s101p76 en [1,2]) × 100"
+    desagregable: [area, prov]
+    ods: "ODS 7 — Energía asequible y no contaminante"
+
+  - id: IND_ENE_07
+    nombre: "Hogares con paneles solares"
+    descripcion: "Porcentaje de hogares que disponen de paneles solares para generación de energía"
+    dimension: energia
+    archivo: ambiental_ago
+    tipo: proporcion
+    variable: s101p77
+    valor_pos: [1]
+    excluir_vals: [3]
+    unidad: "%"
+    formula: "sum(fexp donde s101p77=1) / sum(fexp donde s101p77 en [1,2]) × 100"
+    desagregable: [area, prov]
+    ods: "ODS 7 — Energía asequible y no contaminante"
+
+  - id: IND_ENE_08
+    nombre: "Índice de eficiencia energética del hogar"
+    descripcion: "Índice que mide la adopción de prácticas y equipamientos de eficiencia energética en el hogar. Media ponderada del índice que suma 7 prácticas positivas (0=ninguna, 7=todas)"
+    dimension: energia
+    archivo: ambiental_ago
+    tipo: indice
+    variable: idx_energia
+    valor_pos: null
+    excluir_vals: []
+    unidad: "puntos (0–7)"
+    formula: "media ponderada(idx_energia) con fexp"
+    desagregable: [area, prov]
+    ods: "ODS 7 — Energía asequible y no contaminante"
+
+  # ── DIMENSIÓN: MOVILIDAD ─────────────────────────────────────────
+  # Formulario AGO-2025, Sección 5, Pregunta 2
+  # Para personas de 12 años y más con destino habitual
+
+  - id: IND_MOV_01
+    nombre: "Uso de transporte público colectivo"
+    descripcion: "Porcentaje de personas (≥12 años con destino habitual) cuyo medio principal de traslado es el transporte público colectivo (autobús, metrovía/tranvía/trolebús o metro)"
+    dimension: movilidad
+    archivo: persona_ago
+    tipo: proporcion
+    variable: usa_transporte_publico
+    valor_pos: [1]
+    excluir_vals: []
+    unidad: "%"
+    formula: "sum(fexp donde s5p2 en [1,4,5]) / sum(fexp donde s5p2 no es NaN) × 100"
+    desagregable: [area, prov]
+    ods: "ODS 11 — Ciudades y comunidades sostenibles"
+    nota: "Códigos transporte público colectivo: 1=Autobús, 4=Metrovía/Tranvía/Trolebús, 5=Metro"
+
+  - id: IND_MOV_02
+    nombre: "Movilidad sostenible"
+    descripcion: "Porcentaje de personas cuyo medio principal es transporte público colectivo, bicicleta o desplazamiento a pie"
+    dimension: movilidad
+    archivo: persona_ago
+    tipo: proporcion
+    variable: usa_movilidad_sostenible
+    valor_pos: [1]
+    excluir_vals: []
+    unidad: "%"
+    formula: "sum(fexp donde s5p2 en [1,4,5,8,9]) / sum(fexp donde s5p2 no es NaN) × 100"
+    desagregable: [area, prov]
+    ods: "ODS 11 — Ciudades y comunidades sostenibles"
+
+  - id: IND_MOV_03
+    nombre: "Tiempo promedio de traslado"
+    descripcion: "Tiempo promedio ponderado de traslado desde el hogar al destino habitual, expresado en minutos"
+    dimension: movilidad
+    archivo: persona_ago
+    tipo: media
+    variable: tiempo_traslado_min
+    valor_pos: null
+    excluir_vals: []
+    unidad: "minutos"
+    formula: "sum(fexp × tiempo_traslado_min) / sum(fexp) — solo registros con tiempo válido"
+    desagregable: [area, prov]
+    ods: "ODS 11 — Ciudades y comunidades sostenibles"
+
+  # ── DIMENSIÓN: CONCIENCIA AMBIENTAL ──────────────────────────────
+  # Formulario OCT-2025, Sección 6, Preguntas 9–13
+
+  - id: IND_CA_01
+    nombre: "Hogares que perciben problemas ambientales en su barrio"
+    descripcion: "Porcentaje de hogares que identifican al menos uno de los seis problemas ambientales en su barrio (contaminación visual, agua, ruidos, basura, aire, animales)"
+    dimension: conciencia
+    archivo: ambiental_oct
+    tipo: proporcion
+    variable: percibe_problema_ambiental
+    valor_pos: [1]
+    excluir_vals: []
+    unidad: "%"
+    formula: "sum(fexp donde percibe_problema_ambiental=1) / sum(fexp) × 100"
+    desagregable: [area, prov]
+    ods: "ODS 13 — Acción por el clima"
+
+  - id: IND_CA_02
+    nombre: "Preocupación alta por el ambiente"
+    descripcion: "Porcentaje de hogares cuyo jefe/cónyuge declara preocuparse MUCHO o EXCESIVAMENTE por la situación del ambiente en su barrio (s91p10=4 o 5)"
+    dimension: conciencia
+    archivo: ambiental_oct
+    tipo: proporcion
+    variable: preocupacion_alta
+    valor_pos: [1]
+    excluir_vals: []
+    unidad: "%"
+    formula: "sum(fexp donde s91p10 en [4,5]) / sum(fexp donde s91p10 no es NaN) × 100"
+    desagregable: [area, prov]
+    ods: "ODS 13 — Acción por el clima"
+    nota: "Escala: 1=Nada, 2=Poco, 3=Medianamente, 4=Mucho, 5=Excesivamente"
+
+  - id: IND_CA_03
+    nombre: "Participación en actividades ambientales"
+    descripcion: "Porcentaje de hogares en los que al menos un miembro participó en actividades ambientales durante los últimos 12 meses (voluntariado, denuncia, manifestación, educación ambiental)"
+    dimension: conciencia
+    archivo: ambiental_oct
+    tipo: proporcion
+    variable: participo_actividad_ambiental
+    valor_pos: [1]
+    excluir_vals: []
+    unidad: "%"
+    formula: "sum(fexp donde participo_actividad_ambiental=1) / sum(fexp) × 100"
+    desagregable: [area, prov]
+    ods: "ODS 13 — Acción por el clima"
+
+  - id: IND_CA_04
+    nombre: "Uso de bolsa reutilizable en compras"
+    descripcion: "Porcentaje de hogares que habitualmente utilizan bolsa o contenedor de tela o material reutilizable al hacer sus compras"
+    dimension: conciencia
+    archivo: ambiental_ago
+    tipo: proporcion
+    variable: s91p7
+    valor_pos: [1]
+    excluir_vals: []
+    unidad: "%"
+    formula: "sum(fexp donde s91p7=1) / sum(fexp donde s91p7 no es NaN) × 100"
+    desagregable: [area, prov]
+    ods: "ODS 12 — Producción y consumo responsables"
+    nota: "Códigos: 1=Tela/reutilizable, 2=Papel/cartón, 3=Plástico desechable"
+
+  - id: IND_CA_05
+    nombre: "Índice de conciencia ambiental (ICA)"
+    descripcion: "Índice compuesto que integra preocupación ambiental, percepción de problemas y participación en actividades ambientales. Media ponderada del índice (0=ninguna dimensión, 3=todas)"
+    dimension: conciencia
+    archivo: ambiental_oct
+    tipo: indice
+    variable: idx_conciencia
+    valor_pos: null
+    excluir_vals: []
+    unidad: "puntos (0–3)"
+    formula: "media ponderada(idx_conciencia) con fexp"
+    desagregable: [area, prov]
+    ods: "ODS 13 — Acción por el clima"
