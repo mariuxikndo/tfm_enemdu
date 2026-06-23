@@ -278,7 +278,7 @@ class Transformer:
                             s5p2_num.isin(TRANSP_NO_MOTORIZADO), "no_motorizado",
                             np.where(
                                 s5p2_num.isin(TRANSP_ELECTRICO), "electrico",
-                                np.where(s5p2_num.notna(), "otro", np.nan)
+                                np.where(s5p2_num.notna(), "otro", None)
                             )
                         )
                     )
