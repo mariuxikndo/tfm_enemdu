@@ -1,20 +1,20 @@
 # Pipeline ETL: ingesta y transformacion
-pandas==2.2.2           # Manipulacion de DataFrames
-odfpy==1.4.1            # Lectura de archivos ODS del INEC
+pandas>=2.0.0          # Manipulacion de DataFrames
+odfpy>=1.4.1            # Lectura de archivos ODS del INEC
 pyreadstat==1.2.7       # Lectura de archivos Stata .dta con etiquetas
-pyarrow==16.0.0         # Motor Parquet (lectura/escritura)
+pyarrow>=16.0.0         # Motor Parquet (lectura/escritura)
 openpyxl==3.1.2         # Lectura/escritura de archivos Excel
 
 # Almacenamiento y consultas 
 duckdb==0.10.3          # Consultas SQL analiticas sobre Parquet
-pyyaml==6.0.1           # Lectura de archivos de configuración YAML
+pyyaml>=6.0           # Lectura de archivos de configuración YAML
 
 # Motor de cálculo 
-numpy==1.26.4           # Operaciones numéricas
+numpy>=1.26.0           # Operaciones numéricas
 
 # Plataforma web
 streamlit==1.35.0       # Framework de la aplicación web
-plotly==5.22.0          # Gráficos interactivos (barras, líneas, mapas)
+plotly>=5.22.0          # Gráficos interactivos (barras, líneas, mapas)
 altair==5.3.0           # Gráficos declarativos (alternativa a Plotly)
 
 # Mapas geográficos

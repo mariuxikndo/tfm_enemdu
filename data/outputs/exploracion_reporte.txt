@@ -1,0 +1,28 @@
+REPORTE DE EXPLORACIÓN — MIAH-ENEMDU 2025
+============================================================
+
+
+[ambiental_ago]
+  Filas    : 8,607
+  Columnas : ['area', 'ciudad', 'prov', 'cant', 's101p71', 's101p72', 's101p73', 's101p74', 's101p75', 's101p76', 's101p77', 's91p7', 's91p8a', 's91p8b', 's91p8c', 's91p8d', 'estrato', 'fexp', 'periodo', 'archivo_origen']
+  Nulos:
+
+[ambiental_oct]
+  Filas    : 8,757
+  Columnas : ['area', 'ciudad', 'conglomerado', 'panelm', 'vivienda', 'hogar', 's101p11', 's101p12a', 's101p12b', 's101p12c', 's101p12d', 's101p12e', 's101p2a', 's101p2b', 's101p2c', 's101p2d', 's101p2e', 's101p2f', 's101p5a', 's101p5b', 's101p5c', 's101p5d', 's101p5e', 's101p5f', 's101p5g', 's101p51a', 's101p52a', 's101p51b', 's101p52b', 's101p51c', 's101p52c', 's101p51d', 's101p52d', 's101p51e', 's101p52e', 's101p51f', 's101p52f', 's101p51g', 's101p52g', 's101p51h', 's101p52h', 's101p51i', 's101p52i', 's101p51j', 's101p52j', 's101p51k', 's101p52k', 's101p51l', 's101p52l', 's101p61', 's101p62', 's101p63', 's101p64', 's101p65', 's101p66', 's101p67', 's101p68', 's91p91', 's91p92', 's91p93', 's91p94', 's91p95', 's91p96', 's91p10', 's91p111', 's91p112', 's91p113', 's91p114', 's91p115', 's91p121', 's91p122', 's91p123', 's91p124', 's91p125', 's91p126', 's91p131', 's91p132', 's91p133', 'fexp', 'periodo', 'archivo_origen']
+  Nulos:
+
+[persona_ago]
+  Filas    : 27,580
+  Columnas : ['area', 'prov_dirad', 'cant', 'vivienda', 'hogar', 'p01', 'p02', 'p03', 's5p1', 's5p2', 's5p3', 's5p4', 's5p5', 's5p5d', 's5p6a', 's5p6b', 's5p7a', 's5p7b', 'fexp', 'ingpc', 'jefes', 'periodo', 'archivo_origen']
+  Nulos:
+    s5p1: 4101 nulos (14.9%)
+    s5p2: 4579 nulos (16.6%)
+    s5p3: 4579 nulos (16.6%)
+    s5p4: 4579 nulos (16.6%)
+    s5p5: 25364 nulos (92.0%)
+    s5p6a: 4579 nulos (16.6%)
+    s5p6b: 4579 nulos (16.6%)
+    s5p7a: 4579 nulos (16.6%)
+    s5p7b: 4579 nulos (16.6%)
+    ingpc: 139 nulos (0.5%)

@@ -1,0 +1,800 @@
+{
+  "ambiental_ago": {
+    "filas": 8607,
+    "columnas": 30,
+    "variables": {
+      "area": {
+        "tipo": "Int64",
+        "nulos": 0,
+        "pct_nulos": 0.0
+      },
+      "ciudad": {
+        "tipo": "int64",
+        "nulos": 0,
+        "pct_nulos": 0.0
+      },
+      "prov": {
+        "tipo": "Int64",
+        "nulos": 0,
+        "pct_nulos": 0.0
+      },
+      "cant": {
+        "tipo": "Int64",
+        "nulos": 0,
+        "pct_nulos": 0.0
+      },
+      "s101p71": {
+        "tipo": "Int64",
+        "nulos": 0,
+        "pct_nulos": 0.0
+      },
+      "s101p72": {
+        "tipo": "Int64",
+        "nulos": 0,
+        "pct_nulos": 0.0
+      },
+      "s101p73": {
+        "tipo": "Int64",
+        "nulos": 0,
+        "pct_nulos": 0.0
+      },
+      "s101p74": {
+        "tipo": "Int64",
+        "nulos": 0,
+        "pct_nulos": 0.0
+      },
+      "s101p75": {
+        "tipo": "Int64",
+        "nulos": 0,
+        "pct_nulos": 0.0
+      },
+      "s101p76": {
+        "tipo": "Int64",
+        "nulos": 191,
+        "pct_nulos": 2.22
+      },
+      "s101p77": {
+        "tipo": "Int64",
+        "nulos": 1,
+        "pct_nulos": 0.01
+      },
+      "s91p7": {
+        "tipo": "Int64",
+        "nulos": 0,
+        "pct_nulos": 0.0
+      },
+      "s91p8a": {
+        "tipo": "Int64",
+        "nulos": 1198,
+        "pct_nulos": 13.92
+      },
+      "s91p8b": {
+        "tipo": "Int64",
+        "nulos": 1006,
+        "pct_nulos": 11.69
+      },
+      "s91p8c": {
+        "tipo": "Int64",
+        "nulos": 775,
+        "pct_nulos": 9.0
+      },
+      "s91p8d": {
+        "tipo": "Int64",
+        "nulos": 28,
+        "pct_nulos": 0.33
+      },
+      "estrato": {
+        "tipo": "int64",
+        "nulos": 0,
+        "pct_nulos": 0.0
+      },
+      "fexp": {
+        "tipo": "float64",
+        "nulos": 0,
+        "pct_nulos": 0.0
+      },
+      "periodo": {
+        "tipo": "object",
+        "nulos": 0,
+        "pct_nulos": 0.0
+      },
+      "archivo_origen": {
+        "tipo": "object",
+        "nulos": 0,
+        "pct_nulos": 0.0
+      },
+      "area_nombre": {
+        "tipo": "object",
+        "nulos": 0,
+        "pct_nulos": 0.0
+      },
+      "prov_nombre": {
+        "tipo": "object",
+        "nulos": 0,
+        "pct_nulos": 0.0
+      },
+      "s101p71_positivo": {
+        "tipo": "Int64",
+        "nulos": 0,
+        "pct_nulos": 0.0
+      },
+      "s101p72_positivo": {
+        "tipo": "Int64",
+        "nulos": 0,
+        "pct_nulos": 0.0
+      },
+      "s101p74_positivo": {
+        "tipo": "Int64",
+        "nulos": 0,
+        "pct_nulos": 0.0
+      },
+      "s101p75_positivo": {
+        "tipo": "Int64",
+        "nulos": 0,
+        "pct_nulos": 0.0
+      },
+      "s101p73_positivo": {
+        "tipo": "Int64",
+        "nulos": 0,
+        "pct_nulos": 0.0
+      },
+      "s101p76_positivo": {
+        "tipo": "Int64",
+        "nulos": 191,
+        "pct_nulos": 2.22
+      },
+      "s101p77_positivo": {
+        "tipo": "Int64",
+        "nulos": 1,
+        "pct_nulos": 0.01
+      },
+      "idx_energia": {
+        "tipo": "Int64",
+        "nulos": 191,
+        "pct_nulos": 2.22
+      }
+    }
+  },
+  "ambiental_oct": {
+    "filas": 8757,
+    "columnas": 96,
+    "variables": {
+      "area": {
+        "tipo": "Int64",
+        "nulos": 0,
+        "pct_nulos": 0.0
+      },
+      "ciudad": {
+        "tipo": "int64",
+        "nulos": 0,
+        "pct_nulos": 0.0
+      },
+      "conglomerado": {
+        "tipo": "int64",
+        "nulos": 0,
+        "pct_nulos": 0.0
+      },
+      "panelm": {
+        "tipo": "int64",
+        "nulos": 0,
+        "pct_nulos": 0.0
+      },
+      "vivienda": {
+        "tipo": "int64",
+        "nulos": 0,
+        "pct_nulos": 0.0
+      },
+      "hogar": {
+        "tipo": "int64",
+        "nulos": 0,
+        "pct_nulos": 0.0
+      },
+      "s101p11": {
+        "tipo": "Int64",
+        "nulos": 0,
+        "pct_nulos": 0.0
+      },
+      "s101p12a": {
+        "tipo": "Int64",
+        "nulos": 0,
+        "pct_nulos": 0.0
+      },
+      "s101p12b": {
+        "tipo": "Int64",
+        "nulos": 0,
+        "pct_nulos": 0.0
+      },
+      "s101p12c": {
+        "tipo": "Int64",
+        "nulos": 0,
+        "pct_nulos": 0.0
+      },
+      "s101p12d": {
+        "tipo": "Int64",
+        "nulos": 0,
+        "pct_nulos": 0.0
+      },
+      "s101p12e": {
+        "tipo": "Int64",
+        "nulos": 0,
+        "pct_nulos": 0.0
+      },
+      "s101p2a": {
+        "tipo": "Int64",
+        "nulos": 0,
+        "pct_nulos": 0.0
+      },
+      "s101p2b": {
+        "tipo": "Int64",
+        "nulos": 0,
+        "pct_nulos": 0.0
+      },
+      "s101p2c": {
+        "tipo": "Int64",
+        "nulos": 0,
+        "pct_nulos": 0.0
+      },
+      "s101p2d": {
+        "tipo": "Int64",
+        "nulos": 0,
+        "pct_nulos": 0.0
+      },
+      "s101p2e": {
+        "tipo": "Int64",
+        "nulos": 0,
+        "pct_nulos": 0.0
+      },
+      "s101p2f": {
+        "tipo": "Int64",
+        "nulos": 0,
+        "pct_nulos": 0.0
+      },
+      "s101p5a": {
+        "tipo": "Int64",
+        "nulos": 0,
+        "pct_nulos": 0.0
+      },
+      "s101p5b": {
+        "tipo": "Int64",
+        "nulos": 0,
+        "pct_nulos": 0.0
+      },
+      "s101p5c": {
+        "tipo": "Int64",
+        "nulos": 0,
+        "pct_nulos": 0.0
+      },
+      "s101p5d": {
+        "tipo": "Int64",
+        "nulos": 0,
+        "pct_nulos": 0.0
+      },
+      "s101p5e": {
+        "tipo": "Int64",
+        "nulos": 0,
+        "pct_nulos": 0.0
+      },
+      "s101p5f": {
+        "tipo": "Int64",
+        "nulos": 0,
+        "pct_nulos": 0.0
+      },
+      "s101p5g": {
+        "tipo": "Int64",
+        "nulos": 0,
+        "pct_nulos": 0.0
+      },
+      "s101p51a": {
+        "tipo": "int64",
+        "nulos": 0,
+        "pct_nulos": 0.0
+      },
+      "s101p52a": {
+        "tipo": "int64",
+        "nulos": 0,
+        "pct_nulos": 0.0
+      },
+      "s101p51b": {
+        "tipo": "int64",
+        "nulos": 0,
+        "pct_nulos": 0.0
+      },
+      "s101p52b": {
+        "tipo": "int64",
+        "nulos": 0,
+        "pct_nulos": 0.0
+      },
+      "s101p51c": {
+        "tipo": "int64",
+        "nulos": 0,
+        "pct_nulos": 0.0
+      },
+      "s101p52c": {
+        "tipo": "int64",
+        "nulos": 0,
+        "pct_nulos": 0.0
+      },
+      "s101p51d": {
+        "tipo": "int64",
+        "nulos": 0,
+        "pct_nulos": 0.0
+      },
+      "s101p52d": {
+        "tipo": "int64",
+        "nulos": 0,
+        "pct_nulos": 0.0
+      },
+      "s101p51e": {
+        "tipo": "int64",
+        "nulos": 0,
+        "pct_nulos": 0.0
+      },
+      "s101p52e": {
+        "tipo": "int64",
+        "nulos": 0,
+        "pct_nulos": 0.0
+      },
+      "s101p51f": {
+        "tipo": "int64",
+        "nulos": 0,
+        "pct_nulos": 0.0
+      },
+      "s101p52f": {
+        "tipo": "int64",
+        "nulos": 0,
+        "pct_nulos": 0.0
+      },
+      "s101p51g": {
+        "tipo": "int64",
+        "nulos": 0,
+        "pct_nulos": 0.0
+      },
+      "s101p52g": {
+        "tipo": "int64",
+        "nulos": 0,
+        "pct_nulos": 0.0
+      },
+      "s101p51h": {
+        "tipo": "int64",
+        "nulos": 0,
+        "pct_nulos": 0.0
+      },
+      "s101p52h": {
+        "tipo": "int64",
+        "nulos": 0,
+        "pct_nulos": 0.0
+      },
+      "s101p51i": {
+        "tipo": "int64",
+        "nulos": 0,
+        "pct_nulos": 0.0
+      },
+      "s101p52i": {
+        "tipo": "int64",
+        "nulos": 0,
+        "pct_nulos": 0.0
+      },
+      "s101p51j": {
+        "tipo": "int64",
+        "nulos": 0,
+        "pct_nulos": 0.0
+      },
+      "s101p52j": {
+        "tipo": "int64",
+        "nulos": 0,
+        "pct_nulos": 0.0
+      },
+      "s101p51k": {
+        "tipo": "int64",
+        "nulos": 0,
+        "pct_nulos": 0.0
+      },
+      "s101p52k": {
+        "tipo": "int64",
+        "nulos": 0,
+        "pct_nulos": 0.0
+      },
+      "s101p51l": {
+        "tipo": "int64",
+        "nulos": 0,
+        "pct_nulos": 0.0
+      },
+      "s101p52l": {
+        "tipo": "int64",
+        "nulos": 0,
+        "pct_nulos": 0.0
+      },
+      "s101p61": {
+        "tipo": "Int64",
+        "nulos": 0,
+        "pct_nulos": 0.0
+      },
+      "s101p62": {
+        "tipo": "Int64",
+        "nulos": 0,
+        "pct_nulos": 0.0
+      },
+      "s101p63": {
+        "tipo": "Int64",
+        "nulos": 0,
+        "pct_nulos": 0.0
+      },
+      "s101p64": {
+        "tipo": "Int64",
+        "nulos": 0,
+        "pct_nulos": 0.0
+      },
+      "s101p65": {
+        "tipo": "Int64",
+        "nulos": 0,
+        "pct_nulos": 0.0
+      },
+      "s101p66": {
+        "tipo": "Int64",
+        "nulos": 322,
+        "pct_nulos": 3.68
+      },
+      "s101p67": {
+        "tipo": "Int64",
+        "nulos": 275,
+        "pct_nulos": 3.14
+      },
+      "s101p68": {
+        "tipo": "Int64",
+        "nulos": 274,
+        "pct_nulos": 3.13
+      },
+      "s91p91": {
+        "tipo": "Int64",
+        "nulos": 0,
+        "pct_nulos": 0.0
+      },
+      "s91p92": {
+        "tipo": "Int64",
+        "nulos": 0,
+        "pct_nulos": 0.0
+      },
+      "s91p93": {
+        "tipo": "Int64",
+        "nulos": 0,
+        "pct_nulos": 0.0
+      },
+      "s91p94": {
+        "tipo": "Int64",
+        "nulos": 0,
+        "pct_nulos": 0.0
+      },
+      "s91p95": {
+        "tipo": "Int64",
+        "nulos": 0,
+        "pct_nulos": 0.0
+      },
+      "s91p96": {
+        "tipo": "Int64",
+        "nulos": 0,
+        "pct_nulos": 0.0
+      },
+      "s91p10": {
+        "tipo": "Int64",
+        "nulos": 3057,
+        "pct_nulos": 34.91
+      },
+      "s91p111": {
+        "tipo": "Int64",
+        "nulos": 0,
+        "pct_nulos": 0.0
+      },
+      "s91p112": {
+        "tipo": "Int64",
+        "nulos": 0,
+        "pct_nulos": 0.0
+      },
+      "s91p113": {
+        "tipo": "Int64",
+        "nulos": 0,
+        "pct_nulos": 0.0
+      },
+      "s91p114": {
+        "tipo": "Int64",
+        "nulos": 0,
+        "pct_nulos": 0.0
+      },
+      "s91p115": {
+        "tipo": "Int64",
+        "nulos": 0,
+        "pct_nulos": 0.0
+      },
+      "s91p121": {
+        "tipo": "Int64",
+        "nulos": 4983,
+        "pct_nulos": 56.9
+      },
+      "s91p122": {
+        "tipo": "Int64",
+        "nulos": 4107,
+        "pct_nulos": 46.9
+      },
+      "s91p123": {
+        "tipo": "Int64",
+        "nulos": 4581,
+        "pct_nulos": 52.31
+      },
+      "s91p124": {
+        "tipo": "Int64",
+        "nulos": 4880,
+        "pct_nulos": 55.73
+      },
+      "s91p125": {
+        "tipo": "Int64",
+        "nulos": 4898,
+        "pct_nulos": 55.93
+      },
+      "s91p126": {
+        "tipo": "Int64",
+        "nulos": 964,
+        "pct_nulos": 11.01
+      },
+      "s91p131": {
+        "tipo": "Int64",
+        "nulos": 1377,
+        "pct_nulos": 15.72
+      },
+      "s91p132": {
+        "tipo": "Int64",
+        "nulos": 2750,
+        "pct_nulos": 31.4
+      },
+      "s91p133": {
+        "tipo": "Int64",
+        "nulos": 2744,
+        "pct_nulos": 31.33
+      },
+      "fexp": {
+        "tipo": "float64",
+        "nulos": 0,
+        "pct_nulos": 0.0
+      },
+      "periodo": {
+        "tipo": "object",
+        "nulos": 0,
+        "pct_nulos": 0.0
+      },
+      "archivo_origen": {
+        "tipo": "object",
+        "nulos": 0,
+        "pct_nulos": 0.0
+      },
+      "area_nombre": {
+        "tipo": "object",
+        "nulos": 0,
+        "pct_nulos": 0.0
+      },
+      "s101p61_positivo": {
+        "tipo": "Int64",
+        "nulos": 0,
+        "pct_nulos": 0.0
+      },
+      "s101p62_positivo": {
+        "tipo": "Int64",
+        "nulos": 0,
+        "pct_nulos": 0.0
+      },
+      "s101p63_positivo": {
+        "tipo": "Int64",
+        "nulos": 0,
+        "pct_nulos": 0.0
+      },
+      "s101p64_positivo": {
+        "tipo": "Int64",
+        "nulos": 0,
+        "pct_nulos": 0.0
+      },
+      "s101p65_positivo": {
+        "tipo": "Int64",
+        "nulos": 0,
+        "pct_nulos": 0.0
+      },
+      "s101p66_positivo": {
+        "tipo": "Int64",
+        "nulos": 322,
+        "pct_nulos": 3.68
+      },
+      "s101p67_positivo": {
+        "tipo": "Int64",
+        "nulos": 275,
+        "pct_nulos": 3.14
+      },
+      "s101p68_positivo": {
+        "tipo": "Int64",
+        "nulos": 274,
+        "pct_nulos": 3.13
+      },
+      "idx_agua": {
+        "tipo": "Int64",
+        "nulos": 439,
+        "pct_nulos": 5.01
+      },
+      "clasifica_inorganico": {
+        "tipo": "Int64",
+        "nulos": 0,
+        "pct_nulos": 0.0
+      },
+      "percibe_problema_ambiental": {
+        "tipo": "Int64",
+        "nulos": 0,
+        "pct_nulos": 0.0
+      },
+      "participo_actividad_ambiental": {
+        "tipo": "Int64",
+        "nulos": 0,
+        "pct_nulos": 0.0
+      },
+      "preocupacion_alta": {
+        "tipo": "Int64",
+        "nulos": 3057,
+        "pct_nulos": 34.91
+      },
+      "idx_conciencia": {
+        "tipo": "Int64",
+        "nulos": 3057,
+        "pct_nulos": 34.91
+      }
+    }
+  },
+  "persona_ago": {
+    "filas": 27580,
+    "columnas": 30,
+    "variables": {
+      "area": {
+        "tipo": "Int64",
+        "nulos": 0,
+        "pct_nulos": 0.0
+      },
+      "prov": {
+        "tipo": "Int64",
+        "nulos": 0,
+        "pct_nulos": 0.0
+      },
+      "cant": {
+        "tipo": "Int64",
+        "nulos": 0,
+        "pct_nulos": 0.0
+      },
+      "vivienda": {
+        "tipo": "int64",
+        "nulos": 0,
+        "pct_nulos": 0.0
+      },
+      "hogar": {
+        "tipo": "int64",
+        "nulos": 0,
+        "pct_nulos": 0.0
+      },
+      "p01": {
+        "tipo": "int64",
+        "nulos": 0,
+        "pct_nulos": 0.0
+      },
+      "p02": {
+        "tipo": "Int64",
+        "nulos": 0,
+        "pct_nulos": 0.0
+      },
+      "p03": {
+        "tipo": "Int64",
+        "nulos": 0,
+        "pct_nulos": 0.0
+      },
+      "s5p1": {
+        "tipo": "float64",
+        "nulos": 4101,
+        "pct_nulos": 14.87
+      },
+      "s5p2": {
+        "tipo": "Int64",
+        "nulos": 12932,
+        "pct_nulos": 46.89
+      },
+      "s5p3": {
+        "tipo": "Int64",
+        "nulos": 4584,
+        "pct_nulos": 16.62
+      },
+      "s5p4": {
+        "tipo": "Int64",
+        "nulos": 4579,
+        "pct_nulos": 16.6
+      },
+      "s5p5": {
+        "tipo": "Int64",
+        "nulos": 27137,
+        "pct_nulos": 98.39
+      },
+      "s5p5d": {
+        "tipo": "object",
+        "nulos": 0,
+        "pct_nulos": 0.0
+      },
+      "s5p6a": {
+        "tipo": "Int64",
+        "nulos": 4579,
+        "pct_nulos": 16.6
+      },
+      "s5p6b": {
+        "tipo": "Int64",
+        "nulos": 25856,
+        "pct_nulos": 93.75
+      },
+      "s5p7a": {
+        "tipo": "float64",
+        "nulos": 4579,
+        "pct_nulos": 16.6
+      },
+      "s5p7b": {
+        "tipo": "Int64",
+        "nulos": 12855,
+        "pct_nulos": 46.61
+      },
+      "fexp": {
+        "tipo": "float64",
+        "nulos": 0,
+        "pct_nulos": 0.0
+      },
+      "ingpc": {
+        "tipo": "float64",
+        "nulos": 139,
+        "pct_nulos": 0.5
+      },
+      "jefes": {
+        "tipo": "int64",
+        "nulos": 0,
+        "pct_nulos": 0.0
+      },
+      "periodo": {
+        "tipo": "object",
+        "nulos": 0,
+        "pct_nulos": 0.0
+      },
+      "archivo_origen": {
+        "tipo": "object",
+        "nulos": 0,
+        "pct_nulos": 0.0
+      },
+      "area_nombre": {
+        "tipo": "object",
+        "nulos": 0,
+        "pct_nulos": 0.0
+      },
+      "prov_nombre": {
+        "tipo": "object",
+        "nulos": 0,
+        "pct_nulos": 0.0
+      },
+      "tiempo_traslado_min": {
+        "tipo": "Int64",
+        "nulos": 25856,
+        "pct_nulos": 93.75
+      },
+      "distancia_km": {
+        "tipo": "Float64",
+        "nulos": 12855,
+        "pct_nulos": 46.61
+      },
+      "tipo_transporte": {
+        "tipo": "object",
+        "nulos": 12932,
+        "pct_nulos": 46.89
+      },
+      "usa_movilidad_sostenible": {
+        "tipo": "Int64",
+        "nulos": 12932,
+        "pct_nulos": 46.89
+      },
+      "usa_transporte_publico": {
+        "tipo": "Int64",
+        "nulos": 12932,
+        "pct_nulos": 46.89
+      }
+    }
+  }
+}

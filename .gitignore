@@ -21,10 +21,10 @@ htmlcov/
 
 # Datos sensibles (microdatos INEC sin procesar)
 # Los microdatos raw NO se versionan por tamaño y licencia
-data/raw/
+# data/raw/
 # Los datos procesados tampoco (pueden regenerarse con el pipeline)
-data/processed/
-data/outputs/
+# data/processed/
+# data/outputs/
 
 # Jupyter
 .ipynb_checkpoints/
