@@ -127,8 +127,10 @@ def render_dimension_page(
     col_izq, col_der = st.columns([3, 1] if ind_indice else [1], gap="large") \
         if ind_indice else (st.columns([1])[0], None)
 
-    df_plot = df[~df["indicador_id"].str.endswith("08") &
-                 ~df["indicador_id"].str.endswith("05")].copy() \
+    # Excluir solo el indicador de índice compuesto — no todos los que
+    # terminan en "05" u "08", ya que IND_AGUA_05 es un indicador válido.
+    excluir_ids = {ind_indice} if ind_indice else set()
+    df_plot = df[~df["indicador_id"].isin(excluir_ids)].copy() \
         if not df.empty else df
 
     with col_izq if ind_indice else st.container():
@@ -192,7 +194,25 @@ def render_dimension_page(
                 try:
                     df_prov_all = cargar_por_provincia()
                     df_prov = filtrar_dimension(df_prov_all, dimension)
-                    df_prov_ind = df_prov[df_prov["indicador_id"] == kpi_prov]
+
+                    # Fallback: si filtrar_dimension devuelve vacío porque el
+                    # DataFrame no tiene columna "dimension", filtrar por prefijo
+                    # del indicador_id (IND_AGUA_, IND_RES_, IND_ENE_, etc.)
+                    if df_prov.empty and not df_prov_all.empty:
+                        prefijos = {
+                            "agua":       "IND_AGUA",
+                            "residuos":   "IND_RES",
+                            "energia":    "IND_ENE",
+                            "movilidad":  "IND_MOV",
+                            "conciencia": "IND_CA",
+                        }
+                        prefijo = prefijos.get(dimension, "")
+                        if prefijo and "indicador_id" in df_prov_all.columns:
+                            df_prov = df_prov_all[
+                                df_prov_all["indicador_id"].str.startswith(prefijo)
+                            ].copy()
+
+                    df_prov_ind = df_prov[df_prov["indicador_id"] == kpi_prov].copy()
                     etiqueta_prov = kpis[0]["etiqueta"] if kpis else kpi_prov
                     fig_prov = mapa_provincias(
                         df_prov_ind,

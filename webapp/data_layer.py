@@ -1,14 +1,13 @@
 """
-webapp/data_layer.py
+webapp/data_layer.py  — versión corregida
 ────────────────────────────────────────────────────────────────────
-Capa de acceso a datos para la webapp Streamlit.
-
-Conecta la interfaz con el motor de cálculo mediante:
-  1. Modo rápido   : lee resultados precalculados desde SQLite
-  2. Modo dinámico : calcula directamente con Engine (si no hay SQLite)
-
-Todas las funciones usan @st.cache_data para evitar recálculos
-en cada interacción del usuario.
+Correcciones aplicadas:
+1. _db_disponible(tabla) verifica la tabla específica, no solo la nacional.
+   Esto evita que cargar_por_provincia() use SQLite cuando la tabla
+   provincial no existe, saltándose el fallback al engine dinámico.
+2. cargar_por_area() y cargar_por_provincia() verifican su propia tabla.
+3. cargar_por_provincia() añade columnas prov_nombre y dimension si faltan,
+   garantizando que el gráfico de provincias siempre funcione.
 """
 
 from __future__ import annotations
@@ -53,62 +52,110 @@ PROVINCIAS = {
     90: "Zonas No Delimitadas",
 }
 
+# Prefijo de indicador_id → dimensión
+_PREFIJO_DIMENSION = {
+    "IND_AGUA": "agua",
+    "IND_RES":  "residuos",
+    "IND_ENE":  "energia",
+    "IND_MOV":  "movilidad",
+    "IND_CA":   "conciencia",
+}
+
 
 # ── Carga del motor (singleton) ───────────────────────────────────
 @st.cache_resource
 def _get_engine():
-    """Inicializa el Engine una sola vez por sesión."""
     from calculator.engine   import Engine
     from calculator.exporter import Exporter
     return Engine(), Exporter()
 
 
-def _db_disponible() -> bool:
-    """Verifica si el SQLite de indicadores está disponible."""
+def _db_disponible(tabla: str = "indicadores_nacionales") -> bool:
+    """
+    Verifica si una tabla ESPECÍFICA del SQLite existe y tiene datos.
+    Cada función de carga verifica su propia tabla.
+    Antes solo se verificaba 'indicadores_nacionales', lo que causaba
+    que cargar_por_provincia() devolviera vacío sin ejecutar el fallback.
+    """
     from calculator.exporter import Exporter
     exp = Exporter()
-    tablas = exp.tablas_disponibles()
-    return "indicadores_nacionales" in tablas
+    return tabla in exp.tablas_disponibles()
+
+
+def _enriquecer_provincia(df: pd.DataFrame) -> pd.DataFrame:
+    """
+    Añade prov_nombre y dimension al DataFrame de provincias si faltan.
+    Garantiza que el gráfico de barras provinciales funcione siempre.
+    """
+    if df.empty:
+        return df
+    # Añadir nombre de provincia
+    if "prov_nombre" not in df.columns and "prov" in df.columns:
+        df = df.copy()
+        df["prov_nombre"] = (
+            pd.to_numeric(df["prov"], errors="coerce")
+            .map(PROVINCIAS)
+        )
+    # Añadir columna dimension derivada del indicador_id
+    if "dimension" not in df.columns and "indicador_id" in df.columns:
+        df = df.copy()
+        def _dim(iid):
+            for prefijo, dim in _PREFIJO_DIMENSION.items():
+                if str(iid).startswith(prefijo):
+                    return dim
+            return None
+        df["dimension"] = df["indicador_id"].apply(_dim)
+    return df
 
 
 # ── Funciones de carga con caché ──────────────────────────────────
 
 @st.cache_data(ttl=3600, show_spinner="Cargando indicadores...")
 def cargar_nacionales() -> pd.DataFrame:
-    """
-    Carga todos los indicadores a nivel nacional.
-    Modo rápido: SQLite. Modo dinámico: Engine.
-    """
-    if _db_disponible():
+    if _db_disponible("indicadores_nacionales"):
         engine, exporter = _get_engine()
-        return exporter.cargar_nacionales()
-    else:
-        engine, _ = _get_engine()
-        return engine.calcular_kpis_nacionales()
+        df = exporter.cargar_nacionales()
+        if not df.empty:
+            return df
+    engine, _ = _get_engine()
+    return engine.calcular_kpis_nacionales()
 
 
 @st.cache_data(ttl=3600, show_spinner="Cargando datos por área...")
 def cargar_por_area() -> pd.DataFrame:
-    """Carga indicadores desagregados por área (urbano/rural)."""
-    if _db_disponible():
+    """Carga indicadores por área — verifica su propia tabla SQLite."""
+    if _db_disponible("indicadores_por_area"):
         engine, exporter = _get_engine()
-        return exporter.cargar_por_area()
-    else:
-        from calculator.filters import Filtros
-        engine, _ = _get_engine()
-        return engine.calcular_todos(desagregacion="area")
+        df = exporter.cargar_por_area()
+        if not df.empty:
+            return df
+    # Fallback dinámico
+    from calculator.filters import Filtros
+    engine, _ = _get_engine()
+    return engine.calcular_todos(desagregacion="area")
 
 
 @st.cache_data(ttl=3600, show_spinner="Cargando datos por provincia...")
 def cargar_por_provincia() -> pd.DataFrame:
-    """Carga indicadores desagregados por provincia."""
-    if _db_disponible():
+    """
+    Carga indicadores por provincia.
+    Verifica 'indicadores_por_provincia' específicamente.
+    Si no existe o está vacía, calcula dinámicamente con el engine.
+    Añade prov_nombre y dimension para garantizar compatibilidad con gráficos.
+    """
+    df = pd.DataFrame()
+
+    if _db_disponible("indicadores_por_provincia"):
         engine, exporter = _get_engine()
-        return exporter.cargar_por_provincia()
-    else:
+        df = exporter.cargar_por_provincia()
+
+    if df.empty:
+        # Fallback: calcular dinámicamente
         from calculator.filters import Filtros
         engine, _ = _get_engine()
-        return engine.calcular_todos(desagregacion="prov")
+        df = engine.calcular_todos(desagregacion="prov")
+
+    return _enriquecer_provincia(df)
 
 
 @st.cache_data(ttl=3600, show_spinner="Calculando indicadores...")
@@ -117,15 +164,6 @@ def cargar_dimension(
     area: Optional[int] = None,
     prov: Optional[int] = None,
 ) -> pd.DataFrame:
-    """
-    Carga indicadores de una dimensión con filtros opcionales.
-
-    Parámetros
-    ----------
-    dimension : "agua" | "residuos" | "energia" | "movilidad" | "conciencia"
-    area      : 1=Urbano | 2=Rural | None (todos)
-    prov      : código de provincia | None (todas)
-    """
     from calculator.filters import Filtros
     engine, _ = _get_engine()
     filtros = Filtros(area=area, prov=prov)
@@ -139,9 +177,6 @@ def cargar_comparativa(
     area_a: Optional[int], prov_a: Optional[int],
     area_b: Optional[int], prov_b: Optional[int],
 ) -> pd.DataFrame:
-    """
-    Carga una comparativa entre dos conjuntos de filtros.
-    """
     from calculator.filters import Filtros
     engine, _ = _get_engine()
     fa = Filtros(area=area_a, prov=prov_a)
@@ -152,10 +187,31 @@ def cargar_comparativa(
 # ── Funciones auxiliares ──────────────────────────────────────────
 
 def filtrar_dimension(df: pd.DataFrame, dimension: str) -> pd.DataFrame:
-    """Filtra un DataFrame de resultados por dimensión."""
-    if df.empty or "dimension" not in df.columns:
+    """
+    Filtra por dimensión.
+    Primero intenta la columna 'dimension'; si no existe,
+    filtra por prefijo del indicador_id.
+    """
+    if df.empty:
         return pd.DataFrame()
-    return df[df["dimension"] == dimension].copy()
+
+    if "dimension" in df.columns:
+        return df[df["dimension"] == dimension].copy()
+
+    # Fallback: filtrar por prefijo del indicador_id
+    if "indicador_id" in df.columns:
+        prefijos = {
+            "agua":       "IND_AGUA",
+            "residuos":   "IND_RES",
+            "energia":    "IND_ENE",
+            "movilidad":  "IND_MOV",
+            "conciencia": "IND_CA",
+        }
+        prefijo = prefijos.get(dimension, "")
+        if prefijo:
+            return df[df["indicador_id"].str.startswith(prefijo)].copy()
+
+    return pd.DataFrame()
 
 
 def obtener_valor(
@@ -163,7 +219,6 @@ def obtener_valor(
     indicador_id: str,
     col: str = "valor",
 ) -> Optional[float]:
-    """Extrae el valor de un indicador específico."""
     if df.empty or "indicador_id" not in df.columns:
         return None
     fila = df[df["indicador_id"] == indicador_id]
@@ -176,14 +231,12 @@ def _inferir_desagregacion(
     area: Optional[int],
     prov: Optional[int],
 ) -> Optional[str]:
-    """Infiere el nivel de desagregación según los filtros activos."""
     if area is None and prov is None:
         return "area"
     return None
 
 
 def mostrar_error_sin_datos() -> None:
-    """Muestra un mensaje de error cuando no hay datos disponibles."""
     st.error(
         "**No hay datos disponibles.**\n\n"
         "Ejecuta primero el pipeline y el motor de cálculo:\n\n"
@@ -195,7 +248,6 @@ def mostrar_error_sin_datos() -> None:
 
 
 def mostrar_advertencia_filtro_vacio() -> None:
-    """Muestra advertencia cuando un filtro deja el dataset vacío."""
     st.warning(
         "No hay registros para la combinación de filtros seleccionada. "
         "Prueba con un área o provincia diferente."
