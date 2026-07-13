@@ -17,10 +17,14 @@ st.set_page_config(
 from webapp.components.sidebar_filters import render_sidebar_comparativo
 from webapp.components.charts import barras_comparativas
 from webapp.data_layer import (
-    cargar_dimension,          # ← cada grupo se calcula por separado
+    cargar_dimension,
     mostrar_error_sin_datos,
     NOMBRES_DIMENSION,
 )
+
+# Dimensiones que SÍ tienen columna prov en sus datos fuente
+# ambiental_ago → energia | persona_ago → movilidad
+DIMENSIONES_CON_PROVINCIA = {"energia", "movilidad"}
 
 CSS = """<style>
 .stApp{background-color:#F4F7FB;}
@@ -57,32 +61,54 @@ dim_sel = st.selectbox(
 )
 dimension = dim_opciones[dim_sel]
 
+# ── Aviso de disponibilidad provincial ───────────────────────────
+prov_a = fa.get("prov")
+prov_b = fb.get("prov")
+area_a = fa.get("area")
+area_b = fb.get("area")
+
+filtros_distintos = (area_a != area_b) or (prov_a != prov_b)
+tiene_prov_seleccionada = prov_a is not None or prov_b is not None
+sin_soporte_provincial = dimension not in DIMENSIONES_CON_PROVINCIA
+
+if tiene_prov_seleccionada and sin_soporte_provincial:
+    st.warning(
+        f"⚠️ **La dimensión '{dim_sel}' no dispone de desglose provincial** "
+        f"en los datos del INEC (los archivos de Agua, Residuos y Conciencia "
+        f"no incluyen la variable de provincia). "
+        f"El filtro de provincia no se aplicará — se mostrarán los resultados "
+        f"del área geográfica seleccionada (Nacional, Urbano o Rural).\n\n"
+        f"Las dimensiones que **sí** permiten comparativa provincial son: "
+        f"**Eficiencia Energética** y **Movilidad**."
+    )
+elif not filtros_distintos:
+    st.info(
+        "ℹ️ Los dos grupos tienen los mismos filtros. "
+        "Modifica el área o la provincia de uno de los grupos "
+        "para obtener una comparativa con diferencias."
+    )
+
 st.markdown("---")
 
 # ── Calcular comparativa ──────────────────────────────────────────
 if st.button("🔄 Calcular comparativa", type="primary"):
     with st.spinner(f"Calculando {dim_sel} para ambos grupos..."):
         try:
-            # Calcular cada grupo de forma independiente con cargar_dimension,
-            # que aplica correctamente los filtros de área y provincia.
-            # Esto garantiza que Sucumbíos y Cotopaxi (u otros filtros)
-            # produzcan resultados distintos.
             df_a = cargar_dimension(
                 dimension,
-                area=fa.get("area"),
-                prov=fa.get("prov"),
+                area=area_a,
+                prov=prov_a if dimension in DIMENSIONES_CON_PROVINCIA else None,
             ).copy()
             df_b = cargar_dimension(
                 dimension,
-                area=fb.get("area"),
-                prov=fb.get("prov"),
+                area=area_b,
+                prov=prov_b if dimension in DIMENSIONES_CON_PROVINCIA else None,
             ).copy()
 
             if df_a.empty or df_b.empty:
                 st.warning("Sin datos para uno o ambos grupos seleccionados.")
                 st.stop()
 
-            # Añadir columna grupo y combinar
             df_a["grupo"] = "A"
             df_b["grupo"] = "B"
             df_comp = pd.concat([df_a, df_b], ignore_index=True)
@@ -95,6 +121,17 @@ if st.button("🔄 Calcular comparativa", type="primary"):
     if df_comp.empty:
         st.warning("Sin datos para la comparativa seleccionada.")
         st.stop()
+
+    # Advertencia si los resultados son idénticos
+    vals_a = df_a.sort_values("indicador_id")["valor"].round(2).values
+    vals_b = df_b.sort_values("indicador_id")["valor"].round(2).values
+    if list(vals_a) == list(vals_b):
+        st.warning(
+            "⚠️ Los resultados de ambos grupos son idénticos. "
+            "Esto ocurre cuando los filtros seleccionados producen el mismo "
+            "subconjunto de datos. Prueba con filtros de área distintos "
+            "(ej. Urbano vs Rural)."
+        )
 
     # ── Gráfico comparativo ───────────────────────────────────────
     st.markdown(f"**{dim_sel} — comparativa**")
@@ -114,11 +151,9 @@ if st.button("🔄 Calcular comparativa", type="primary"):
     col_b_lbl = f"Grupo B ({fb['label']})"
 
     df_ta = df_a[["indicador_id", "indicador", "valor"]].rename(
-        columns={"valor": col_a_lbl}
-    )
+        columns={"valor": col_a_lbl})
     df_tb = df_b[["indicador_id", "valor"]].rename(
-        columns={"valor": col_b_lbl}
-    )
+        columns={"valor": col_b_lbl})
     df_tabla = df_ta.merge(df_tb, on="indicador_id", how="outer")
     df_tabla["Diferencia (A-B)"] = (
         df_tabla[col_a_lbl] - df_tabla[col_b_lbl]
@@ -135,7 +170,6 @@ if st.button("🔄 Calcular comparativa", type="primary"):
         hide_index=True,
     )
 
-    # ── Exportar ──────────────────────────────────────────────────
     csv = df_tabla.to_csv(index=False, encoding="utf-8-sig")
     st.download_button(
         "⬇️ Descargar tabla comparativa",
@@ -151,13 +185,15 @@ else:
     )
     st.markdown("""
     **Ejemplos de comparativas útiles:**
-    - 🏙️ Urbano vs 🌾 Rural — ¿Quién tiene mejores prácticas ambientales?
-    - 🗺️ Pichincha vs Guayas — Diferencias entre las dos principales provincias
-    - ✅ Nacional vs una provincia específica
+    - 🏙️ **Urbano vs Rural** — ¿Quién tiene mejores prácticas ambientales?
+    - 🗺️ **Pichincha vs Guayas** — Solo para Energía y Movilidad (tienen datos provinciales)
+    - ✅ **Nacional vs Urbano** — Diferencia entre el agregado nacional y el área urbana
     """)
 
 st.markdown(
     """<p style="text-align:center;color:#9CA3AF;font-size:.72rem;margin-top:24px;">
-    Fuente: INEC Ecuador · MIAH-ENEMDU 2025 · Resultados ponderados con fexp</p>""",
+    Fuente: INEC Ecuador · MIAH-ENEMDU 2025 · Resultados ponderados con fexp<br>
+    ⚠ Desglose provincial disponible solo para Energía y Movilidad
+    (archivos ambiental_ago y persona_ago)</p>""",
     unsafe_allow_html=True,
 )
