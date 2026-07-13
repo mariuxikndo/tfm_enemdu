@@ -112,24 +112,6 @@ if st.button("🔄 Calcular comparativa", type="primary"):
         mime="text/csv",
     )
 
-    # ── Resumen automático ────────────────────────────────────────
-    st.markdown("---")
-    st.markdown("**Resumen automático**")
-    mejoras = df_tabla[df_tabla["Diferencia (A-B)"] > 0]["indicador"].tolist()
-    retrocesos = df_tabla[df_tabla["Diferencia (A-B)"] < 0]["indicador"].tolist()
-    if mejoras:
-        st.success(
-            f"El Grupo A ({fa['label']}) supera al Grupo B en: "
-            + ", ".join(mejoras[:3])
-            + ("..." if len(mejoras) > 3 else ".")
-        )
-    if retrocesos:
-        st.warning(
-            f"El Grupo B ({fb['label']}) supera al Grupo A en: "
-            + ", ".join(retrocesos[:3])
-            + ("..." if len(retrocesos) > 3 else ".")
-        )
-
 else:
     st.info(
         "Configura los dos grupos en el panel lateral y pulsa "

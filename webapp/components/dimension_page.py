@@ -184,35 +184,30 @@ def render_dimension_page(
             except Exception:
                 st.info("Desglose por área no disponible.")
 
-    # ── Desglose por provincia (si no hay filtro de provincia) ────
+    # ── Desglose por provincia ────────────────────────────────────
+    # Solo se muestra si el archivo fuente de la dimensión contiene la
+    # columna prov. ambiental_oct (agua, residuos, conciencia) no la
+    # incluye, por lo que esos dashboards no mostrarán esta sección.
     if filtros.get("prov") is None:
-        st.markdown("---")
-        st.markdown("**Distribución provincial**")
         kpi_prov = kpis[0]["id"] if kpis else None
         if kpi_prov:
-            with st.spinner("Cargando por provincia..."):
-                try:
-                    df_prov_all = cargar_por_provincia()
-                    df_prov = filtrar_dimension(df_prov_all, dimension)
+            try:
+                df_prov_all = cargar_por_provincia()
+                df_prov = filtrar_dimension(df_prov_all, dimension)
+                df_prov_ind = df_prov[
+                    df_prov["indicador_id"] == kpi_prov
+                ].copy() if not df_prov.empty else pd.DataFrame()
 
-                    # Fallback: si filtrar_dimension devuelve vacío porque el
-                    # DataFrame no tiene columna "dimension", filtrar por prefijo
-                    # del indicador_id (IND_AGUA_, IND_RES_, IND_ENE_, etc.)
-                    if df_prov.empty and not df_prov_all.empty:
-                        prefijos = {
-                            "agua":       "IND_AGUA",
-                            "residuos":   "IND_RES",
-                            "energia":    "IND_ENE",
-                            "movilidad":  "IND_MOV",
-                            "conciencia": "IND_CA",
-                        }
-                        prefijo = prefijos.get(dimension, "")
-                        if prefijo and "indicador_id" in df_prov_all.columns:
-                            df_prov = df_prov_all[
-                                df_prov_all["indicador_id"].str.startswith(prefijo)
-                            ].copy()
-
-                    df_prov_ind = df_prov[df_prov["indicador_id"] == kpi_prov].copy()
+                # Mostrar SOLO si hay datos reales de varias provincias
+                tiene_datos = (
+                    not df_prov_ind.empty
+                    and "valor" in df_prov_ind.columns
+                    and df_prov_ind["valor"].notna().any()
+                    and len(df_prov_ind) > 1
+                )
+                if tiene_datos:
+                    st.markdown("---")
+                    st.markdown("**Distribución provincial**")
                     etiqueta_prov = kpis[0]["etiqueta"] if kpis else kpi_prov
                     fig_prov = mapa_provincias(
                         df_prov_ind,
@@ -220,8 +215,9 @@ def render_dimension_page(
                         color=color,
                     )
                     st.plotly_chart(fig_prov, use_container_width=True)
-                except Exception:
-                    st.info("Desglose provincial no disponible.")
+                # Sin datos provinciales: sección invisible, sin error
+            except Exception:
+                pass
 
     # ── Tabla de datos ────────────────────────────────────────────
     with st.expander("📋 Ver tabla de datos completa"):
