@@ -19,14 +19,13 @@
 # ══════════════════════════════════════════════════════════════════
 
 dimensiones:
-  agua:       "Prácticas de uso del agua"
-  residuos:   "Gestión y clasificación de residuos"
-  energia:    "Eficiencia energética"
-  movilidad:  "Movilidad y transporte"
+  agua: "Prácticas de uso del agua"
+  residuos: "Gestión y clasificación de residuos"
+  energia: "Eficiencia energética"
+  movilidad: "Movilidad y transporte"
   conciencia: "Conciencia y responsabilidad ambiental"
 
 indicadores:
-
   # ── DIMENSIÓN: AGUA ──────────────────────────────────────────────
   # Formulario OCT-2025, Sección 6, Pregunta 5
   # Escala: 1=Sí, 2=No, 3=No aplica
@@ -138,7 +137,7 @@ indicadores:
     variable: idx_agua
     valor_pos: null
     excluir_vals: []
-    unidad: "puntos (0–8)"
+    unidad: "puntos (0–7)"
     formula: "media ponderada(idx_agua) con fexp"
     desagregable: [area, prov]
     ods: "ODS 6 — Agua limpia y saneamiento"

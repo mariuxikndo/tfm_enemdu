@@ -231,8 +231,12 @@ def _inferir_desagregacion(
     area: Optional[int],
     prov: Optional[int],
 ) -> Optional[str]:
-    if area is None and prov is None:
-        return "area"
+    """
+    Siempre devuelve None para que el gráfico principal muestre
+    un único valor agregado por indicador.
+    La comparativa urbano/rural usa cargar_por_area() de forma
+    independiente, por lo que no necesita desagregación aquí.
+    """
     return None
 
 

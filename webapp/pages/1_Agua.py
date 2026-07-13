@@ -27,6 +27,6 @@ render_dimension_page(
     ],
     ind_barras  = None,
     ind_indice  = "IND_AGUA_08",
-    indice_max  = 8.0,
+    indice_max  = 7.0,
     filtros     = filtros,
 )
