@@ -8,11 +8,19 @@ ROOT = Path(__file__).parent.parent.parent
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
-st.set_page_config(page_title="Comparativo · MIAH-ENEMDU", page_icon="⚖️", layout="wide")
+st.set_page_config(
+    page_title="Comparativo · MIAH-ENEMDU",
+    page_icon="⚖️",
+    layout="wide",
+)
 
 from webapp.components.sidebar_filters import render_sidebar_comparativo
 from webapp.components.charts import barras_comparativas
-from webapp.data_layer import cargar_comparativa, mostrar_error_sin_datos, NOMBRES_DIMENSION
+from webapp.data_layer import (
+    cargar_dimension,          # ← cada grupo se calcula por separado
+    mostrar_error_sin_datos,
+    NOMBRES_DIMENSION,
+)
 
 CSS = """<style>
 .stApp{background-color:#F4F7FB;}
@@ -55,11 +63,30 @@ st.markdown("---")
 if st.button("🔄 Calcular comparativa", type="primary"):
     with st.spinner(f"Calculando {dim_sel} para ambos grupos..."):
         try:
-            df_comp = cargar_comparativa(
+            # Calcular cada grupo de forma independiente con cargar_dimension,
+            # que aplica correctamente los filtros de área y provincia.
+            # Esto garantiza que Sucumbíos y Cotopaxi (u otros filtros)
+            # produzcan resultados distintos.
+            df_a = cargar_dimension(
                 dimension,
-                area_a=fa.get("area"), prov_a=fa.get("prov"),
-                area_b=fb.get("area"), prov_b=fb.get("prov"),
-            )
+                area=fa.get("area"),
+                prov=fa.get("prov"),
+            ).copy()
+            df_b = cargar_dimension(
+                dimension,
+                area=fb.get("area"),
+                prov=fb.get("prov"),
+            ).copy()
+
+            if df_a.empty or df_b.empty:
+                st.warning("Sin datos para uno o ambos grupos seleccionados.")
+                st.stop()
+
+            # Añadir columna grupo y combinar
+            df_a["grupo"] = "A"
+            df_b["grupo"] = "B"
+            df_comp = pd.concat([df_a, df_b], ignore_index=True)
+
         except Exception as e:
             mostrar_error_sin_datos()
             st.error(str(e))
@@ -68,19 +95,6 @@ if st.button("🔄 Calcular comparativa", type="primary"):
     if df_comp.empty:
         st.warning("Sin datos para la comparativa seleccionada.")
         st.stop()
-
-    # ── Tabla de diferencias ──────────────────────────────────────
-    df_a = df_comp[df_comp["grupo"] == "A"][["indicador_id","indicador","valor"]].rename(
-        columns={"valor": f"Grupo A ({fa['label']})"})
-    df_b = df_comp[df_comp["grupo"] == "B"][["indicador_id","valor"]].rename(
-        columns={"valor": f"Grupo B ({fb['label']})"})
-    df_tabla = df_a.merge(df_b, on="indicador_id", how="outer")
-    col_a = f"Grupo A ({fa['label']})"
-    col_b = f"Grupo B ({fb['label']})"
-    df_tabla["Diferencia (A-B)"] = (df_tabla[col_a] - df_tabla[col_b]).round(2)
-    df_tabla["Variación (%)"] = (
-        (df_tabla[col_a] - df_tabla[col_b]) / df_tabla[col_b].abs() * 100
-    ).round(1).apply(lambda x: f"{x:+.1f}%" if pd.notna(x) else "—")
 
     # ── Gráfico comparativo ───────────────────────────────────────
     st.markdown(f"**{dim_sel} — comparativa**")
@@ -95,7 +109,25 @@ if st.button("🔄 Calcular comparativa", type="primary"):
     )
     st.plotly_chart(fig, use_container_width=True)
 
-    # ── Tabla resumen ─────────────────────────────────────────────
+    # ── Tabla de diferencias ──────────────────────────────────────
+    col_a_lbl = f"Grupo A ({fa['label']})"
+    col_b_lbl = f"Grupo B ({fb['label']})"
+
+    df_ta = df_a[["indicador_id", "indicador", "valor"]].rename(
+        columns={"valor": col_a_lbl}
+    )
+    df_tb = df_b[["indicador_id", "valor"]].rename(
+        columns={"valor": col_b_lbl}
+    )
+    df_tabla = df_ta.merge(df_tb, on="indicador_id", how="outer")
+    df_tabla["Diferencia (A-B)"] = (
+        df_tabla[col_a_lbl] - df_tabla[col_b_lbl]
+    ).round(2)
+    df_tabla["Variación (%)"] = (
+        (df_tabla[col_a_lbl] - df_tabla[col_b_lbl])
+        / df_tabla[col_b_lbl].abs() * 100
+    ).round(1).apply(lambda x: f"{x:+.1f}%" if pd.notna(x) else "—")
+
     st.markdown("**Tabla de diferencias**")
     st.dataframe(
         df_tabla.drop(columns=["indicador_id"]),
@@ -124,6 +156,8 @@ else:
     - ✅ Nacional vs una provincia específica
     """)
 
-st.markdown("""<p style="text-align:center;color:#9CA3AF;font-size:.72rem;margin-top:24px;">
-Fuente: INEC Ecuador · MIAH-ENEMDU 2025 · Resultados ponderados con fexp</p>""",
-unsafe_allow_html=True)
+st.markdown(
+    """<p style="text-align:center;color:#9CA3AF;font-size:.72rem;margin-top:24px;">
+    Fuente: INEC Ecuador · MIAH-ENEMDU 2025 · Resultados ponderados con fexp</p>""",
+    unsafe_allow_html=True,
+)
