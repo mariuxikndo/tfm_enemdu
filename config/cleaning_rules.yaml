@@ -13,194 +13,194 @@
 
 # ── Variables geográficas ─────────────────────────────────────────
 area:
-  tipo_nulo:    [99, 0, ""]
+  tipo_nulo: [99, 0, ""]
   valores_valid: [1, 2]
-  recodificar:  {}
-  tipo_dato:    int
+  recodificar: {}
+  tipo_dato: int
 
 prov:
-  tipo_nulo:    [99, 0, ""]
-  valores_valid: null          # validado por etiquetas_provincia en settings
-  tipo_dato:    int
+  tipo_nulo: [99, 0, ""]
+  valores_valid: null # validado por etiquetas_provincia en settings
+  tipo_dato: int
 
-prov_dirad:    # alias en persona_ago — se renombrará a "prov"
-  tipo_nulo:    [99, 0, ""]
+prov_dirad: # alias en persona_ago — se renombrará a "prov"
+  tipo_nulo: [99, 0, ""]
   valores_valid: null
-  tipo_dato:    int
+  tipo_dato: int
 
 cant:
-  tipo_nulo:    [9999, 0, ""]
+  tipo_nulo: [9999, 0, ""]
   valores_valid: null
-  tipo_dato:    int
+  tipo_dato: int
 
 # ── Factor de expansión ───────────────────────────────────────────
 fexp:
-  tipo_nulo:    [0, -1, ""]
-  valores_valid: null          # debe ser > 0
-  tipo_dato:    float
+  tipo_nulo: [0, -1, ""]
+  valores_valid: null # debe ser > 0
+  tipo_dato: float
   validacion_extra: "mayor_que_cero"
 
 # ── Variables de ENERGÍA (ambiental_ago) ─────────────────────────
 # Escala típica ENEMDU: 1=Siempre, 2=Casi siempre, 3=A veces, 4=Nunca
 # 9=No sabe/No responde
-s101p71:   &energia_habito
-  tipo_nulo:    [9, 99, ""]
-  valores_valid: [1, 2, 3, 4]
-  tipo_dato:    int
+s101p71: &energia_habito
+  tipo_nulo: [9, 99, ""]
+  valores_valid: [1, 2, 3]
+  tipo_dato: int
 
-s101p72:   *energia_habito
-s101p73:   *energia_habito
-s101p74:   *energia_habito
-s101p75:   *energia_habito
+s101p72: *energia_habito
+s101p73: *energia_habito
+s101p74: *energia_habito
+s101p75: *energia_habito
 
 # Escala típica: 1=Sí, 2=No, 9=No responde
-s101p76:   &binaria
-  tipo_nulo:    [9, 99, ""]
+s101p76: &binaria
+  tipo_nulo: [9, 99, ""]
   valores_valid: [1, 2]
-  tipo_dato:    int
+  tipo_dato: int
 
-s101p77:   *binaria
+s101p77: *binaria
 
 # ── Variables de AGUA (ambiental_oct) ────────────────────────────
-s101p61:   *energia_habito    # 1=Siempre, 2=Casi siempre, 3=A veces, 4=Nunca
-s101p62:   *energia_habito
-s101p63:   *energia_habito
-s101p64:   *energia_habito
-s101p65:   *energia_habito
-s101p66:   *binaria           # 1=Sí tiene economizador, 2=No
-s101p67:   *binaria           # 1=Sí tiene doble descarga, 2=No
-s101p68:   *binaria           # 1=Sí coloca objeto en tanque, 2=No
+s101p61: *energia_habito # 1=Siempre, 2=Casi siempre, 3=A veces, 4=Nunca
+s101p62: *energia_habito
+s101p63: *energia_habito
+s101p64: *energia_habito
+s101p65: *energia_habito
+s101p66: *binaria # 1=Sí tiene economizador, 2=No
+s101p67: *binaria # 1=Sí tiene doble descarga, 2=No
+s101p68: *binaria # 1=Sí coloca objeto en tanque, 2=No
 
 # ── Variables de RESIDUOS — Clasificación (ambiental_oct) ────────
-s101p11:   *binaria    # 1=Sí clasificó orgánicos, 2=No
-s101p12a:  *binaria    # papel/cartón
-s101p12b:  *binaria    # plástico
-s101p12c:  *binaria    # vidrio
-s101p12d:  *binaria    # metal
-s101p12e:  *binaria    # tetrapak
+s101p11: *binaria # 1=Sí clasificó orgánicos, 2=No
+s101p12a: *binaria # papel/cartón
+s101p12b: *binaria # plástico
+s101p12c: *binaria # vidrio
+s101p12d: *binaria # metal
+s101p12e: *binaria # tetrapak
 
 # ── Variables de RESIDUOS — Eliminación (ambiental_oct) ──────────
 # Escala típica: 1=Basura común, 2=Reciclaje, 3=Compost, 4=Quema, 5=Otro, 9=NS/NR
-s101p2a:   &eliminacion
-  tipo_nulo:    [9, 99, ""]
-  valores_valid: null          # múltiples categorías — validar en exploración
-  tipo_dato:    int
+s101p2a: &eliminacion
+  tipo_nulo: [9, 99, ""]
+  valores_valid: null # múltiples categorías — validar en exploración
+  tipo_dato: int
 
-s101p2b:   *eliminacion
-s101p2c:   *eliminacion
-s101p2d:   *eliminacion
-s101p2e:   *eliminacion
-s101p2f:   *eliminacion
+s101p2b: *eliminacion
+s101p2c: *eliminacion
+s101p2d: *eliminacion
+s101p2e: *eliminacion
+s101p2f: *eliminacion
 
 # ── Variables de RESIDUOS — Desechos especiales (ambiental_oct) ──
-s101p5a:   *eliminacion    # pilas
-s101p5b:   *eliminacion    # farmacéuticos
-s101p5c:   *eliminacion    # aceite/grasas
-s101p5d:   *eliminacion    # focos ahorradores
-s101p5e:   *eliminacion    # insecticidas
-s101p5f:   *eliminacion    # cartuchos/tóneres
-s101p5g:   *eliminacion    # focos LED
+s101p5a: *eliminacion # pilas
+s101p5b: *eliminacion # farmacéuticos
+s101p5c: *eliminacion # aceite/grasas
+s101p5d: *eliminacion # focos ahorradores
+s101p5e: *eliminacion # insecticidas
+s101p5f: *eliminacion # cartuchos/tóneres
+s101p5g: *eliminacion # focos LED
 
 # ── Variables de CONCIENCIA AMBIENTAL (ambiental_oct) ────────────
 # Problemas en el barrio: 1=Sí, 2=No, 9=NS/NR
-s91p91:   *binaria
-s91p92:   *binaria
-s91p93:   *binaria
-s91p94:   *binaria
-s91p95:   *binaria
-s91p96:   *binaria
+s91p91: *binaria
+s91p92: *binaria
+s91p93: *binaria
+s91p94: *binaria
+s91p95: *binaria
+s91p96: *binaria
 
 # Preocupación: escala 1=Mucho, 2=Poco, 3=Nada, 9=NS/NR
 s91p10:
-  tipo_nulo:    [9, 99, ""]
+  tipo_nulo: [9, 99, ""]
   valores_valid: [1, 2, 3]
-  tipo_dato:    int
+  tipo_dato: int
 
 # Participación: 1=Sí, 2=No, 9=NS/NR
-s91p111:  *binaria
-s91p112:  *binaria
-s91p113:  *binaria
-s91p114:  *binaria
-s91p115:  *binaria
+s91p111: *binaria
+s91p112: *binaria
+s91p113: *binaria
+s91p114: *binaria
+s91p115: *binaria
 
 # Actitudes: Likert 1=Muy de acuerdo, 2=De acuerdo, 3=En desacuerdo, 4=Muy en desacuerdo
-s91p121:  &likert
-  tipo_nulo:    [9, 99, ""]
+s91p121: &likert
+  tipo_nulo: [9, 99, ""]
   valores_valid: [1, 2, 3, 4]
-  tipo_dato:    int
+  tipo_dato: int
 
-s91p122:  *likert
-s91p123:  *likert
-s91p124:  *likert
-s91p125:  *likert
-s91p126:  *likert
-s91p131:  *likert
-s91p132:  *likert
-s91p133:  *likert
+s91p122: *likert
+s91p123: *likert
+s91p124: *likert
+s91p125: *likert
+s91p126: *likert
+s91p131: *likert
+s91p132: *likert
+s91p133: *likert
 
 # ── Variables de CONCIENCIA — Consumo (ambiental_ago) ────────────
 s91p7:
-  tipo_nulo:    [9, 99, ""]
+  tipo_nulo: [9, 99, ""]
   valores_valid: null
-  tipo_dato:    int
+  tipo_dato: int
 
-s91p8a:   *likert
-s91p8b:   *likert
-s91p8c:   *likert
-s91p8d:   *likert
+s91p8a: *likert
+s91p8b: *likert
+s91p8c: *likert
+s91p8d: *likert
 
 # ── Variables de MOVILIDAD (persona_ago) ─────────────────────────
 s5p2:
-  tipo_nulo:    [9, 99, ""]
-  valores_valid: null          # múltiples medios — validar en exploración
-  tipo_dato:    int
+  tipo_nulo: [9, 99, ""]
+  valores_valid: null # múltiples medios — validar en exploración
+  tipo_dato: int
 
 s5p3:
-  tipo_nulo:    [9, 99, ""]
+  tipo_nulo: [9, 99, ""]
   valores_valid: null
-  tipo_dato:    int
+  tipo_dato: int
 
-s5p4:   *binaria
+s5p4: *binaria
 
 s5p5:
-  tipo_nulo:    [9, 99, ""]
+  tipo_nulo: [9, 99, ""]
   valores_valid: null
-  tipo_dato:    int
+  tipo_dato: int
 
-s5p6a:                         # horas de traslado
-  tipo_nulo:    [99, ""]
+s5p6a: # horas de traslado
+  tipo_nulo: [99, ""]
   valores_valid: null
-  tipo_dato:    int
+  tipo_dato: int
   validacion_extra: "mayor_igual_cero"
 
-s5p6b:                         # minutos de traslado
-  tipo_nulo:    [99, ""]
-  valores_valid: [0, 59]        # 0-59 minutos
-  tipo_dato:    int
+s5p6b: # minutos de traslado
+  tipo_nulo: [99, ""]
+  valores_valid: [0, 59] # 0-59 minutos
+  tipo_dato: int
 
-s5p7a:                         # kilómetros
-  tipo_nulo:    [999, ""]
+s5p7a: # kilómetros
+  tipo_nulo: [999, ""]
   valores_valid: null
-  tipo_dato:    float
+  tipo_dato: float
 
-s5p7b:                         # metros
-  tipo_nulo:    [999, ""]
+s5p7b: # metros
+  tipo_nulo: [999, ""]
   valores_valid: [0, 999]
-  tipo_dato:    int
+  tipo_dato: int
 
 # ── Variables demográficas (persona_ago) ─────────────────────────
-p02:                            # sexo
-  tipo_nulo:    [9, ""]
-  valores_valid: [1, 2]         # 1=Hombre, 2=Mujer
-  tipo_dato:    int
+p02: # sexo
+  tipo_nulo: [9, ""]
+  valores_valid: [1, 2] # 1=Hombre, 2=Mujer
+  tipo_dato: int
 
-p03:                            # edad
-  tipo_nulo:    [99, ""]
+p03: # edad
+  tipo_nulo: [99, ""]
   valores_valid: null
-  tipo_dato:    int
+  tipo_dato: int
   validacion_extra: "mayor_igual_cero"
 
 ingpc:
-  tipo_nulo:    [-1, ""]
+  tipo_nulo: [-1, ""]
   valores_valid: null
-  tipo_dato:    float
+  tipo_dato: float

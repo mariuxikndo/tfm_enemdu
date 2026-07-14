@@ -26,7 +26,6 @@ help:
 	@echo "  make calculate   Calcula todos los indicadores"
 	@echo "  make app         Lanza la webapp en http://localhost:8501"
 	@echo "  make test        Ejecuta los tests con pytest"
-	@echo "  make lint        Verifica el estilo del código (flake8)"
 	@echo "  make clean       Elimina archivos temporales y caché"
 	@echo ""
 
@@ -60,11 +59,6 @@ app:
 test:
 	@echo "→ Ejecutando tests..."
 	$(VENV_DIR)/bin/pytest tests/ -v --tb=short --cov=pipeline --cov=calculator --cov-report=term-missing
-
-# Linting
-lint:
-	@echo "→ Verificando estilo del código..."
-	$(VENV_DIR)/bin/flake8 pipeline/ calculator/ webapp/ --max-line-length=100 --exclude=__pycache__
 
 # Limpieza
 clean:
