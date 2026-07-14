@@ -126,15 +126,21 @@ pip install -r requirements.txt
 
 ### Paso 4 — Descargar los microdatos del INEC
 
-Descarga el archivo comprimido desde el portal oficial del INEC:
+Descarga el archivo comprimido desde el portal oficial del INEC, en la sección Información Estadística → Base de Datos → ODS:
 
 🔗 **https://www.ecuadorencifras.gob.ec/hogares/**
 
-El archivo descargado se llama `2_BDD_DATOS_ABIERTOS_MIAH_2025_11_ODS.zip`. Descomprímelo y copia los tres archivos .ods en la carpeta `data/raw/` del proyecto:
+El archivo descargado tiene el nombre 2_BDD_DATOS_ABIERTOS_MIAH_2025_11_ODS.zip.
+
+Una vez descargado:
+
+1. Descomprímelo.
+2. Abre la carpeta BASES DE DATOS.
+3. Desde las carpetas Agosto_2025 y Octubre_2025, copia los tres archivos con extensión .ods a la carpeta data/raw/ del proyecto.
 
 | Archivo | Contenido |
 |---|---|
-| `enemdu_mod_ambiental_2025_08.ods` | Prácticas energéticas y conciencia parcial (agosto 2025) |
+| `enemdu_mod_ambiental_2025_08.ods` | Prácticas energéticas y conciencia ambiental (agosto 2025) |
 | `enemdu_ambiental_2025_10.ods` | Agua, residuos y conciencia ambiental (octubre 2025) |
 | `enemdu_persona_2025_08.ods` | Movilidad — personas de 12 años y más (agosto 2025) |
 
@@ -225,8 +231,19 @@ La plataforma quedará disponible en: https://miah-enemdu.streamlit.app
 Los microdatos utilizados son producidos y publicados por el **Instituto Nacional de Estadística y Censos (INEC) del Ecuador** bajo condiciones de uso académico:
 
 - **Encuesta:** ENEMDU — Módulo de Información Ambiental en Hogares (MIAH) 2025
-- **Portal:** https://www.ecuadorencifras.gob.ec/informacion-ambiental-en-hogares/
+- **Portal:** https://www.ecuadorencifras.gob.ec/hogares/
 - **Condición de uso:** datos estadísticos públicos, citar la fuente original
 
 ---
 
+## Cita del trabajo
+
+Si utilizas este repositorio en tu investigación, por favor cita:
+
+> Cando Ortega, M. (2026). *Plataforma web para análisis y visualización de indicadores ambientales de hogares ENEMDU* [Trabajo de Fin de Máster]. Universidad Internacional de La Rioja (UNIR). https://github.com/mariuxikndo/tfm_enemdu
+
+---
+
+## Licencia
+
+Este proyecto se distribuye bajo la licencia MIT. Consulta el archivo [LICENSE](LICENSE) para más detalles.
