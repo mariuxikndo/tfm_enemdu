@@ -231,7 +231,7 @@ La plataforma quedará disponible en: https://miah-enemdu.streamlit.app
 Los microdatos utilizados son producidos y publicados por el **Instituto Nacional de Estadística y Censos (INEC) del Ecuador** bajo condiciones de uso académico:
 
 - **Encuesta:** ENEMDU — Módulo de Información Ambiental en Hogares (MIAH) 2025
-- **Portal:** https://www.ecuadorencifras.gob.ec/informacion-ambiental-en-hogares/
+- **Portal:** https://www.ecuadorencifras.gob.ec/hogares/
 - **Condición de uso:** datos estadísticos públicos, citar la fuente original
 
 ---
