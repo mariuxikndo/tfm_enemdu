@@ -110,10 +110,10 @@ s91p94: *binaria
 s91p95: *binaria
 s91p96: *binaria
 
-# Preocupación: escala 1=Mucho, 2=Poco, 3=Nada, 9=NS/NR
+# Preocupación: escala 1=Nada, 2=Poco, 3=Medianamente, 4=Mucho, 5=Excesivamente
 s91p10:
   tipo_nulo: [9, 99, ""]
-  valores_valid: [1, 2, 3]
+  valores_valid: [1, 2, 3, 4, 5]
   tipo_dato: int
 
 # Participación: 1=Sí, 2=No, 9=NS/NR
@@ -141,7 +141,7 @@ s91p133: *likert
 # ── Variables de CONCIENCIA — Consumo (ambiental_ago) ────────────
 s91p7:
   tipo_nulo: [9, 99, ""]
-  valores_valid: null
+  valores_valid: [1, 2, 3]
   tipo_dato: int
 
 s91p8a: *likert
