@@ -476,8 +476,8 @@
       },
       "s91p10": {
         "tipo": "Int64",
-        "nulos": 3057,
-        "pct_nulos": 34.91
+        "nulos": 0,
+        "pct_nulos": 0.0
       },
       "s91p111": {
         "tipo": "Int64",
@@ -631,13 +631,13 @@
       },
       "preocupacion_alta": {
         "tipo": "Int64",
-        "nulos": 3057,
-        "pct_nulos": 34.91
+        "nulos": 0,
+        "pct_nulos": 0.0
       },
       "idx_conciencia": {
         "tipo": "Int64",
-        "nulos": 3057,
-        "pct_nulos": 34.91
+        "nulos": 0,
+        "pct_nulos": 0.0
       }
     }
   },
