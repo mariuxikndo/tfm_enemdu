@@ -6,7 +6,7 @@
 [![Streamlit](https://img.shields.io/badge/Streamlit-1.35-red.svg)](https://streamlit.io/)
 [![Licencia MIT](https://img.shields.io/badge/Licencia-MIT-green.svg)](LICENSE)
 
-Plataforma desarrollada como Trabajo de Fin de Máster (TFM) del Máster Universitario en Análisis y Visualización de Datos Masivos — UNIR.
+Plataforma desarrollada como Trabajo de Fin de Estudios (TFE) del Máster Universitario en Análisis y Visualización de Datos Masivos — UNIR.
 
 🔗 **Plataforma en línea:** https://miah-enemdu.streamlit.app
 
